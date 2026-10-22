@@ -60,16 +60,21 @@ public class JsonUtil {
         T jsonFile;
 
         try {
-            jsonFile = deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize);
-            if (jsonFile == null) {
-                throw new IOException("Expected a JSON object, but the document contains null.");
-            }
+            jsonFile = requireDocumentValue(deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize));
         } catch (IOException e) {
             logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
             throw new DataLoadingException(e);
         }
 
         return Optional.of(jsonFile);
+    }
+
+    /** Keeps document validation separate from file access and error normalization. */
+    private static <T> T requireDocumentValue(T value) throws IOException {
+        if (value == null) {
+            throw new IOException("Expected a JSON object, but the document contains null.");
+        }
+        return value;
     }
 
     /**
