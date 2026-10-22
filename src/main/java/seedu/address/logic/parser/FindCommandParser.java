@@ -27,16 +27,20 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (trimmedArgs.startsWith("t/")) {
-            String tagArguments = trimmedArgs.substring(2).trim();
-            if (tagArguments.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-            return new FindCommand(new TagContainsKeywordsPredicate(List.of(tagArguments.split("\\s+"))));
+            return parseTagQuery(trimmedArgs);
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
         return new FindCommand(new NameContainsKeywordsPredicate(List.of(nameKeywords)));
+    }
+
+    private static FindCommand parseTagQuery(String trimmedArgs) throws ParseException {
+        String tagArguments = trimmedArgs.substring(2).trim();
+        if (tagArguments.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        return new FindCommand(new TagContainsKeywordsPredicate(List.of(tagArguments.split("\\s+"))));
     }
 
 }
