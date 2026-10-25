@@ -1,0 +1,13 @@
+<map id="src/main/java/seedu/address/commons/util/CollectionUtil.java" name="src/main/java/seedu/address/commons/util/CollectionUtil.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="308,5,461,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,164,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="310,58,162,107,161,101,305,59"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="188,116,296,142"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="346,61,274,110,271,105,341,62"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="320,116,449,142"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="386,60,387,103,382,100,383,63"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="472,116,588,142"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="427,59,501,108,496,108,426,64"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="612,116,768,142"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="462,55,639,111,633,112,461,61"/>
+</map>

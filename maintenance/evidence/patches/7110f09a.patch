@@ -1,0 +1,57 @@
+commit 7110f09ab3596258640b6910bdf9d5f62e6c5ee3
+Author:     Md. Abid Shahriar <abidshahriar@iut-dhaka.edu>
+AuthorDate: Thu Oct 22 09:28:26 2026 +0600
+Commit:     Md. Abid Shahriar <abidshahriar@iut-dhaka.edu>
+CommitDate: Thu Oct 22 09:28:26 2026 +0600
+
+    Handle JSON null through the existing data-loading error path
+
+diff --git a/src/main/java/seedu/address/commons/util/JsonUtil.java b/src/main/java/seedu/address/commons/util/JsonUtil.java
+index 0b4103c1..328aa01c 100644
+--- a/src/main/java/seedu/address/commons/util/JsonUtil.java
++++ b/src/main/java/seedu/address/commons/util/JsonUtil.java
+@@ -61,6 +61,9 @@ public class JsonUtil {
+ 
+         try {
+             jsonFile = deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize);
++            if (jsonFile == null) {
++                throw new IOException("Expected a JSON object, but the document contains null.");
++            }
+         } catch (IOException e) {
+             logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
+             throw new DataLoadingException(e);
+diff --git a/src/test/java/seedu/address/commons/util/JsonUtilTest.java b/src/test/java/seedu/address/commons/util/JsonUtilTest.java
+index d4907539..187eb37f 100644
+--- a/src/test/java/seedu/address/commons/util/JsonUtilTest.java
++++ b/src/test/java/seedu/address/commons/util/JsonUtilTest.java
+@@ -1,11 +1,16 @@
+ package seedu.address.commons.util;
+ 
+ import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertThrows;
+ 
+ import java.io.IOException;
++import java.nio.file.Files;
+ import java.nio.file.Path;
+ 
+ import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.io.TempDir;
++
++import seedu.address.commons.exceptions.DataLoadingException;
+ 
+ import seedu.address.testutil.SerializableTestClass;
+ import seedu.address.testutil.TestUtil;
+@@ -39,6 +44,13 @@ public class JsonUtilTest {
+         assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
+     }
+ 
++    @Test
++    public void readJsonFile_nullDocument_throwsDataLoadingException(@TempDir Path directory) throws IOException {
++        Path file = directory.resolve("null.json");
++        Files.writeString(file, "null");
++        assertThrows(DataLoadingException.class, () -> JsonUtil.readJsonFile(file, SerializableTestClass.class));
++    }
++
+     //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
+ 
+     //TODO: @Test jsonUtil_writeThenReadObjectToJson_correctObject()

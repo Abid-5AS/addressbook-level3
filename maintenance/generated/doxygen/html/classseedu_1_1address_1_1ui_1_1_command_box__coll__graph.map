@@ -1,0 +1,7 @@
+<map id="seedu.address.ui.CommandBox" name="seedu.address.ui.CommandBox">
+<area shape="rect" id="Node000001" title=" " alt="" coords="81,117,288,143"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1ui_1_1_ui_part.html" title=" " alt="" coords="5,5,167,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,55,176,116,170,117,115,60"/>
+<area shape="rect" id="Node000003" href="$interfaceseedu_1_1address_1_1ui_1_1_command_box_1_1_command_executor.html" title=" " alt="" coords="191,5,376,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="256,57,198,119,195,114,251,58"/>
+</map>

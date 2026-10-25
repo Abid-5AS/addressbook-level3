@@ -1,0 +1,14 @@
+<map id="seedu.address.logic.parser.EditCommandParser.parseTagsForEdit" name="seedu.address.logic.parser.EditCommandParser.parseTagsForEdit">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,27,253,68"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1logic_1_1parser_1_1_parser_util.html#a59438c11ab1f174787055aa394aa7a4e" title=" " alt="" coords="301,27,481,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="253,45,288,47,282,48,253,50"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1logic_1_1parser_1_1_parser_util.html#ac565974e37a1858841a07eaa3e98106d" title=" " alt="" coords="529,27,709,68"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="481,45,516,47,511,48,482,50"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1model_1_1tag_1_1_tag.html#ad4eacdadfa568762c807e8eccfead549" title=" " alt="" coords="1053,31,1224,72"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="696,24,757,13,881,3,936,5,1005,13,1062,27,1056,27,1004,18,935,10,881,8,758,18,697,29"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1logic_1_1parser_1_1exceptions_1_1_parse_exception.html#af176dd2db5bbf9d540dc97c1aba81e25" title=" " alt="" coords="757,27,1005,68"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="710,45,744,47,739,48,710,50"/>
+<area shape="rect" id="Node000006" href="$classseedu_1_1address_1_1model_1_1tag_1_1_tag.html#afbd76e80daf6c427758f4cd350952b3c" title=" " alt="" coords="795,93,967,133"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="704,66,785,89,779,88,703,71"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="967,90,1035,76,1040,75,968,95"/>
+</map>

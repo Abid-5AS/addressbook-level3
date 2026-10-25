@@ -1,0 +1,35 @@
+<map id="src/main/java/seedu/address/logic/parser/AddressBookParser.java" name="src/main/java/seedu/address/logic/parser/AddressBookParser.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1706,5,1875,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,291,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1704,37,1125,60,722,82,307,111,306,106,722,76,1125,55,1709,36"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="315,109,560,150"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1703,38,1229,62,907,83,575,111,574,106,906,78,1229,57,1709,37"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="584,116,738,142"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1703,37,1531,46,1293,58,1023,80,750,112,726,116,726,110,749,106,1022,74,1293,53,1531,40,1709,36"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="762,116,915,142"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1704,38,1365,63,1147,84,927,112,905,115,904,110,926,106,1146,78,1365,58,1709,38"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="939,116,1088,142"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1709,40,1436,68,1268,87,1100,112,1079,116,1078,110,1100,106,1268,82,1435,63,1704,41"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="1112,109,1312,150"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1709,48,1328,111,1327,106,1703,48"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1337,109,1546,150"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1709,57,1529,107,1529,102,1703,57"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1570,109,1779,150"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1760,61,1712,101,1710,96,1755,62"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1803,109,2013,150"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1825,59,1874,100,1869,98,1824,64"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="2037,109,2246,150"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1875,54,2056,105,2050,104,1875,60"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="2270,109,2479,150"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1875,45,2257,108,2252,108,1875,51"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="2503,109,2713,150"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1875,39,2144,65,2491,109,2485,108,2144,71,1875,45"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="2737,109,2946,150"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1875,36,2239,60,2477,80,2724,109,2719,108,2477,85,2239,65,1875,42"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="2970,109,3179,150"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1875,34,2332,55,2639,76,2957,109,2952,109,2639,82,2332,61,1875,40"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="3203,109,3413,150"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1875,33,2101,39,2424,51,2801,73,3191,109,3186,109,2800,78,2423,56,2101,44,1875,38"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="3436,109,3684,150"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="1875,33,2134,38,2513,50,2960,72,3423,109,3418,109,2960,77,2513,55,2133,43,1875,38"/>
+</map>

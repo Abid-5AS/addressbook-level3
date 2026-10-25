@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Address.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.model.person</a> &gt; <span class="el_source">Address.java</span></div><h1>Address.java</h1><pre class="source lang-java linenums">package seedu.address.model.person;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+/**
+ * Represents a Person's address in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ */
+public class Address {
+
+    public static final String MESSAGE_CONSTRAINTS = &quot;Addresses can take any values, and should not be blank&quot;;
+
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise &quot; &quot; (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = &quot;[^\\s].*&quot;;
+
+    public final String value;
+
+    /**
+     * Constructs an {@code Address}.
+     *
+     * @param address A valid address.
+     */
+<span class="fc" id="L27">    public Address(String address) {</span>
+<span class="fc" id="L28">        requireNonNull(address);</span>
+<span class="fc" id="L29">        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);</span>
+<span class="fc" id="L30">        value = address;</span>
+<span class="fc" id="L31">    }</span>
+
+    /**
+     * Returns true if a given string is a valid address.
+     */
+    public static boolean isValidAddress(String test) {
+<span class="fc" id="L37">        return test.matches(VALIDATION_REGEX);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L42">        return value;</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L48">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (!(other instanceof Address otherAddress)) {</span>
+<span class="fc" id="L53">            return false;</span>
+        }
+
+<span class="fc" id="L56">        return value.equals(otherAddress.value);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L61">        return value.hashCode();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

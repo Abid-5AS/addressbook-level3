@@ -1,0 +1,31 @@
+[WARN] Progressbar rendering conflicts with reporting to STDOUT. No progressbar will be shown. Try running with argument -r <file> to output the report to a file instead.
+src/main/java/seedu/address/commons/core/GuiSettings.java:13:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+src/main/java/seedu/address/commons/core/LogsCenter.java:20:	MoreThanOneLogger:	Class contains more than one logger.
+src/main/java/seedu/address/commons/core/index/Index.java:51:	OverrideBothEqualsAndHashcode:	Ensure you override both equals() and hashCode()
+src/main/java/seedu/address/commons/exceptions/DataLoadingException.java:6:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+src/main/java/seedu/address/commons/exceptions/IllegalValueException.java:6:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+src/main/java/seedu/address/logic/commands/AddCommand.java:64:	OverrideBothEqualsAndHashcode:	Ensure you override both equals() and hashCode()
+src/main/java/seedu/address/logic/commands/DeleteCommand.java:49:	OverrideBothEqualsAndHashcode:	Ensure you override both equals() and hashCode()
+src/main/java/seedu/address/logic/commands/EditCommand.java:108:	OverrideBothEqualsAndHashcode:	Ensure you override both equals() and hashCode()
+src/main/java/seedu/address/logic/commands/EditCommand.java:148:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: EditPersonDescriptor.setName(*Name) 
+src/main/java/seedu/address/logic/commands/EditCommand.java:149:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: EditPersonDescriptor.setPhone(*Phone) 
+src/main/java/seedu/address/logic/commands/EditCommand.java:150:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: EditPersonDescriptor.setEmail(*Email) 
+src/main/java/seedu/address/logic/commands/EditCommand.java:151:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: EditPersonDescriptor.setAddress(*Address) 
+src/main/java/seedu/address/logic/commands/EditCommand.java:152:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: EditPersonDescriptor.setTags(Set<*Tag>) 
+src/main/java/seedu/address/logic/commands/EditCommand.java:199:	NullAssignment:	Assigning an Object to null is a code smell.  Consider refactoring.
+src/main/java/seedu/address/logic/commands/EditCommand.java:212:	OverrideBothEqualsAndHashcode:	Ensure you override both equals() and hashCode()
+src/main/java/seedu/address/logic/commands/FindCommand.java:39:	OverrideBothEqualsAndHashcode:	Ensure you override both equals() and hashCode()
+src/main/java/seedu/address/logic/commands/exceptions/CommandException.java:6:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+src/main/java/seedu/address/logic/parser/Prefix.java:8:	AvoidFieldNameMatchingTypeName:	It is somewhat confusing to have a field name matching the declaring class name
+src/main/java/seedu/address/model/AddressBook.java:27:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: AddressBook.resetData(*ReadOnlyAddressBook) 
+src/main/java/seedu/address/model/ModelManager.java:114:	OverrideBothEqualsAndHashcode:	Ensure you override both equals() and hashCode()
+src/main/java/seedu/address/model/UserPrefs.java:26:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: UserPrefs.setGuiSettings(*GuiSettings) 
+src/main/java/seedu/address/model/person/NameContainsKeywordsPredicate.java:26:	OverrideBothEqualsAndHashcode:	Ensure you override both equals() and hashCode()
+src/main/java/seedu/address/model/person/Person.java:69:	CompareObjectsWithEquals:	Use equals() to compare object references.
+src/main/java/seedu/address/model/person/exceptions/DuplicatePersonException.java:7:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+src/main/java/seedu/address/model/person/exceptions/PersonNotFoundException.java:6:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+src/main/java/seedu/address/ui/ResultDisplay.java:17:	AvoidFieldNameMatchingTypeName:	It is somewhat confusing to have a field name matching the declaring class name
+src/main/java/seedu/address/ui/UiManager.java:51:	AvoidCatchingGenericException:	Avoid catching Throwable in try-catch block
+src/main/java/seedu/address/ui/UiManager.java:51:	AvoidCatchingThrowable:	A catch statement should never catch throwable since it includes errors.
+src/main/java/seedu/address/ui/UiManager.java:89:	DoNotTerminateVM:	System.exit() should not be used in J2EE/JEE apps
+[INFO] Found 29 violations.

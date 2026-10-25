@@ -1,0 +1,23 @@
+digraph Architecture {
+  graph [rankdir=TB, bgcolor="white", pad="0.25", label="Recovered from the maintained Java source", labelloc=b];
+  node [shape=box, style=rounded, fontname="Helvetica", fontsize=11];
+  edge [fontname="Helvetica", fontsize=9];
+  UI [label="JavaFX UI\nCommandBox / MainWindow"];
+  Logic [label="LogicManager\nexecute(commandText)"];
+  Parser [label="AddressBookParser\nFindCommandParser"];
+  Find [label="FindCommand\nPredicate<Person>"];
+  Pred [label="Name or Tag predicate"];
+  Model [label="ModelManager\nFilteredList<Person>"];
+  Storage [label="StorageManager\nJSON adapters"];
+  JSON [label="JsonUtil\nnull-document validation"];
+  Disk [label="FileUtil\nstage + atomic move"];
+  UI -> Logic [label="command"];
+  Logic -> Parser [label="parse"];
+  Parser -> Find [label="construct"];
+  Find -> Pred [label="selection policy"];
+  Find -> Model [label="update filter"];
+  Model -> UI [label="observable list"];
+  Logic -> Storage [label="save after command"];
+  Storage -> JSON [label="serialize / deserialize"];
+  JSON -> Disk [label="save JSON"];
+}

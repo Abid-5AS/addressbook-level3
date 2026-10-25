@@ -1,0 +1,21 @@
+<map id="seedu.address.model.ModelManager" name="seedu.address.model.ModelManager">
+<area shape="rect" id="Node000001" title=" " alt="" coords="865,71,1049,111"/>
+<area shape="rect" id="Node000002" href="$interfaceseedu_1_1address_1_1model_1_1_model.html" title=" " alt="" coords="527,29,711,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="727,46,841,60,879,70,873,70,840,66,727,52"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1model_1_1_address_book.html" title=" " alt="" coords="505,78,733,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="748,88,867,91,862,91,748,94"/>
+<area shape="rect" id="Node000004" href="$interfaceseedu_1_1address_1_1model_1_1_read_only_address_book.html" title=" " alt="" coords="194,5,374,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="389,43,482,60,556,77,551,78,481,66,390,48"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1model_1_1person_1_1_unique_person_list.html" title=" " alt="" coords="188,71,380,111"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="396,88,507,90,502,92,396,94"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="5,78,135,104"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="149,88,190,90,185,92,151,94"/>
+<area shape="rect" id="Node000007" href="$classseedu_1_1address_1_1model_1_1_user_prefs.html" title=" " alt="" coords="530,136,708,177"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="723,138,840,117,871,112,877,111,841,122,723,143"/>
+<area shape="rect" id="Node000008" href="$interfaceseedu_1_1address_1_1model_1_1_read_only_user_prefs.html" title=" " alt="" coords="194,136,374,177"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="390,154,532,156,527,157,390,159"/>
+<area shape="rect" id="Node000009" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html" title=" " alt="" coords="184,201,384,242"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="399,198,481,182,527,175,532,174,482,187,400,203"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="26,209,114,234"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="130,219,186,221,181,222,130,224"/>
+</map>

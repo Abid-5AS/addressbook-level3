@@ -1,0 +1,7 @@
+<map id="seedu.address.model.ModelManager.ModelManager" name="seedu.address.model.ModelManager.ModelManager">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,190,79"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1model_1_1_address_book.html#a713d75f1e60e75ffd818784f55045da9" title=" " alt="" coords="238,5,435,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,44,225,41,220,42,191,49"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1model_1_1_user_prefs.html#a078bdf2aae469beb1026f61170393b91" title=" " alt="" coords="248,71,425,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="190,69,235,77,229,77,190,74"/>
+</map>

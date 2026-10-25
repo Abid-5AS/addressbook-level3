@@ -1,0 +1,11 @@
+<map id="seedu.address.model.ReadOnlyAddressBook.getPersonList" name="seedu.address.model.ReadOnlyAddressBook.getPersonList">
+<area shape="rect" id="Node000001" title=" " alt="" coords="496,39,706,79"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1model_1_1_model_manager.html#a9e6929c3ce88a6e30948374dc6bd2837" title=" " alt="" coords="257,5,442,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="478,43,442,41,442,35,483,43"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1model_1_1_address_book.html#aad9cb31ad701ed592600b3b293031fab" title=" " alt="" coords="251,71,448,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="483,74,449,81,448,76,478,75"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1model_1_1_model_manager.html#a95ddf1867a28747108aec02a3ebd8e5c" title=" " alt="" coords="12,5,196,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="239,26,197,28,196,23,244,25"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1model_1_1_address_book.html#af9e191069245da223167c8fe168257e8" title=" " alt="" coords="5,71,203,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="233,91,203,94,203,88,238,91"/>
+</map>

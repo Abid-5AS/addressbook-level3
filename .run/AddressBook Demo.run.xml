@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="AddressBook Demo" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="seedu.address.Main" />
+    <module name="AddressBook-Maintenance.main" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/maintenance/demo-state" />
+    <method v="2"><option name="Make" enabled="true" /></method>
+  </configuration>
+</component>

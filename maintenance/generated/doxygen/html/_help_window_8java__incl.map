@@ -1,0 +1,19 @@
+<map id="src/main/java/seedu/address/ui/HelpWindow.java" name="src/main/java/seedu/address/ui/HelpWindow.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="630,5,820,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,102,160,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="628,36,420,62,172,97,151,101,150,95,171,91,419,56,633,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="184,102,309,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="633,40,484,66,320,97,306,100,305,95,319,91,483,61,627,41"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="332,102,513,127"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="659,46,480,99,479,94,653,47"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="537,102,710,127"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="705,46,650,94,648,89,700,47"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="735,102,921,127"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="749,44,805,92,800,91,748,49"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="945,94,1132,135"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="797,44,955,89,950,89,796,49"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1156,102,1286,127"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="820,37,973,61,1144,91,1163,98,1158,97,1143,97,972,66,820,43"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1310,94,1511,135"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="820,34,1034,57,1298,94,1292,94,1033,63,820,39"/>
+</map>

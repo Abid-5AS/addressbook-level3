@@ -1,0 +1,38 @@
+commit 3c62f6b2345abe8377d55ca053de3920d03f4b22
+Author:     Md. Abid Shahriar <abidshahriar@iut-dhaka.edu>
+AuthorDate: Thu Oct 22 15:00:05 2026 +0600
+Commit:     Md. Abid Shahriar <abidshahriar@iut-dhaka.edu>
+CommitDate: Thu Oct 22 15:00:05 2026 +0600
+
+    Extract tag-query parsing using IntelliJ refactoring
+
+diff --git a/src/main/java/seedu/address/logic/parser/FindCommandParser.java b/src/main/java/seedu/address/logic/parser/FindCommandParser.java
+index 36c78bb0..450e00f4 100644
+--- a/src/main/java/seedu/address/logic/parser/FindCommandParser.java
++++ b/src/main/java/seedu/address/logic/parser/FindCommandParser.java
+@@ -27,11 +27,7 @@ public class FindCommandParser implements Parser<FindCommand> {
+         }
+ 
+         if (trimmedArgs.startsWith("t/")) {
+-            String tagArguments = trimmedArgs.substring(2).trim();
+-            if (tagArguments.isEmpty()) {
+-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+-            }
+-            return new FindCommand(new TagContainsKeywordsPredicate(List.of(tagArguments.split("\\s+"))));
++            return parseTagQuery(trimmedArgs);
+         }
+ 
+         String[] nameKeywords = trimmedArgs.split("\\s+");
+@@ -39,4 +35,12 @@ public class FindCommandParser implements Parser<FindCommand> {
+         return new FindCommand(new NameContainsKeywordsPredicate(List.of(nameKeywords)));
+     }
+ 
++    private static FindCommand parseTagQuery(String trimmedArgs) throws ParseException {
++        String tagArguments = trimmedArgs.substring(2).trim();
++        if (tagArguments.isEmpty()) {
++            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
++        }
++        return new FindCommand(new TagContainsKeywordsPredicate(List.of(tagArguments.split("\\s+"))));
++    }
++
+ }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.logic.LogicManagerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-22T09:00:21.628Z" hostname="MacBook-Air.local" time="0.027">
+  <properties/>
+  <testcase name="execute_invalidCommandFormat_throwsParseException()" classname="seedu.address.logic.LogicManagerTest" time="0.003"/>
+  <testcase name="execute_storageThrowsAdException_throwsCommandException()" classname="seedu.address.logic.LogicManagerTest" time="0.009"/>
+  <testcase name="execute_validCommand_success()" classname="seedu.address.logic.LogicManagerTest" time="0.004"/>
+  <testcase name="execute_storageThrowsIoException_throwsCommandException()" classname="seedu.address.logic.LogicManagerTest" time="0.001"/>
+  <testcase name="execute_commandExecutionError_throwsCommandException()" classname="seedu.address.logic.LogicManagerTest" time="0.001"/>
+  <testcase name="getFilteredPersonList_modifyList_throwsUnsupportedOperationException()" classname="seedu.address.logic.LogicManagerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 22, 2026 3:00:21 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][uicfhmowqewca]
+Oct 22, 2026 3:00:21 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][add n/Amy Bee p/11111111 e/amy@example.com a/Block 312, Amy Street 1]
+Oct 22, 2026 3:00:21 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 22, 2026 3:00:21 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][add n/Amy Bee p/11111111 e/amy@example.com a/Block 312, Amy Street 1]
+Oct 22, 2026 3:00:21 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 9]
+]]></system-err>
+</testsuite>

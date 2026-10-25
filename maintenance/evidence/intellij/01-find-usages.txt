@@ -1,0 +1,470 @@
+Window: "AddressBook-Maintenance – JsonUtil.java [AddressBook-Maintenance.main]", App: IntelliJ IDEA.
+0 standard window AddressBook-Maintenance – JsonUtil.java [AddressBook-Maintenance.main], Secondary Actions: Raise
+	1 container (selectable) Description: Root Pane, Value: 0
+		2 container (selectable) 0
+			3 container (selectable) Description: Main Toolbar ⌥⇞, Value: 0
+				4 container (selectable) 0
+					5 button (selectable) Description: Project: AddressBook-Maintenance, menu, Help: ~/Documents/IUT/SWE 8th Sem/SWE 4802/AddressBook-Maintenance
+					6 button (selectable) Description: lab/maintenance, menu, Help: Git Branch: lab/maintenance
+					7 container (selectable)
+				8 container (selectable)
+				9 container (selectable) 0
+					10 container (selectable) 0
+						11 button (selectable) Description: Current File, Run / Debug Configurations, Help: Run / Debug Configurations
+						12 button (selectable, disabled) The file in the editor is not runnable
+						13 button (selectable, disabled) The file in the editor is not runnable
+						14 button (selectable) More Actions
+					15 button (selectable) JetBrains AI
+					16 button (selectable) Search Everywhere
+					17 button (selectable) IDE and Project Settings
+		18 tab group (selectable, settable, unknown) JsonUtil.java
+			19 scroll bar (selectable) 563
+				20 button (selectable)
+				21 button (selectable)
+			22 container (selectable)
+			23 container (selectable) Description: Action Toolbar, Value: 0
+				24 text (selectable) Auto test on
+				25 button (selectable) Disable
+				26 button (selectable) Hide
+			27 container (selectable) Description: Action Toolbar, Value: 0
+				28 button (selectable, disabled) Sync Changes
+				29 button (selectable, disabled) Hide This Notification
+			30 container (selectable) Description: Hot Swap, Value: 0
+				31 button (selectable) Apply HotSwap
+				32 button (selectable) Hide
+			33 container (selectable) Description: Action Toolbar, Value: 0
+				34 button (selectable) Add Clusters, menu
+				35 button (selectable, disabled) Set the current cluster to <b>Apply</b>
+				36 button (selectable, disabled) Set the current cluster to <b>Delete</b>
+				37 button (selectable, disabled) Set the current cluster to <b>Reload Content From Cluster</b>
+				38 button (selectable, disabled) Set the current cluster to <b>Compare with Cluster</b>
+			39 container (selectable)
+			40 container (selectable) 0
+				41 text (selectable) 2
+				42 button (selectable) Previous Highlighted Error
+				43 button (selectable) Next Highlighted Error
+			44 text (selectable)
+			45 scroll area (selectable) 0
+				46 scroll bar (selectable)
+				47 container (selectable)
+				48 text entry area (selectable, settable) Description: Editor for JsonUtil.java, Value: package seedu.address.commons.util;
+
+import static java.util.Objects.requireNonNull;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.logging.Logger;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
+
+/**
+ * Converts a Java object instance to JSON and vice versa
+ */
+public class JsonUtil {
+
+    private static final Logger logger = LogsCenter.getLogger(JsonUtil.class);
+
+    private static ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
+            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+    static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
+        FileUtil.writeAtomically(jsonFile, toJsonString(objectToSerialize));
+    }
+
+    static <T> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
+            throws IOException {
+        return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
+    }
+
+    /**
+     * Returns the JSON object from the given file or {@code Optional.empty()} object if the file is not found.
+     * If any values are missing from the file, default values will be used, as long as the file is a valid JSON file.
+     *
+     * @param filePath cannot be null.
+     * @param classOfObjectToDeserialize JSON file has to correspond to the structure in the class given here.
+     * @throws DataLoadingException if loading of the JSON file failed.
+     */
+    public static <T> Optional<T> readJsonFile(
+            Path filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
+        requireNonNull(filePath);
+
+        if (!Files.exists(filePath)) {
+            return Optional.empty();
+        }
+        logger.info("JSON file " + filePath + " found.");
+
+        T jsonFile;
+
+        try {
+            jsonFile = requireDocumentValue(deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize));
+        } catch (IOException e) {
+            logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
+            throw new DataLoadingException(e);
+        }
+
+        return Optional.of(jsonFile);
+    }
+
+    /** Keeps document validation separate from file access and error normalization. */
+    private static <T> T requireDocumentValue(T value) throws IOException {
+        if (value == null) {
+            throw new IOException("Expected a JSON object, but the document contains null.");
+        }
+        return value;
+    }
+
+    /**
+     * Saves the Json object to the specified file.
+     * Overwrites existing file if it exists, creates a new file if it doesn't.
+     * @param jsonFile cannot be null
+     * @param filePath cannot be null
+     * @throws IOException if there was an error during writing to the file
+     */
+    public static <T> void saveJsonFile(T jsonFile, Path filePath) throws IOException {
+        requireNonNull(filePath);
+        requireNonNull(jsonFile);
+
+        serializeObjectToJsonFile(filePath, jsonFile);
+    }
+
+
+    /**
+     * Converts a given string representation of JSON data to an instance of a class
+     * @param <T> The generic type to create an instance of
+     * @return The instance of T with the specified values in the JSON string
+     */
+    public static <T> T fromJsonString(String json, Class<T> instanceClass) throws IOException {
+        return objectMapper.readValue(json, instanceClass);
+    }
+
+    /**
+     * Converts a given instance of a class into its JSON data string representation
+     * @param instance The T object to be converted into the JSON string
+     * @param <T> The generic type to create an instance of
+     * @return JSON data representation of the given class instance, in string
+     */
+    public static <T> String toJsonString(T instance) throws JsonProcessingException {
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
+    }
+
+}
+		49 container (selectable) Description: Project Tool Window, Value: 0
+			50 text (selectable) Project
+			51 button (selectable) Project
+			52 container (selectable)
+			53 container (selectable) Description: Action Toolbar, Value: 0
+				54 button (selectable) New File or Directory…
+				55 button (selectable) Select Opened File (⌥F1, 1)
+				56 button (selectable) Expand Selected
+				57 button (selectable) Collapse All
+				58 button (selectable) Options
+				59 button (selectable) Hide
+			60 scroll area (selectable) 0
+				61 scroll bar (selectable)
+				62 scroll bar (selectable)
+				63 outline (selectable) Description: Project structure tree, Value: 0
+					64 row (selected) Description: AddressBook-Maintenance  ~/Documents/IUT/SWE 8th Sem/SWE 4802/AddressBook-Maintenance, module, Value: 0
+						65 text (selectable) Description: AddressBook-Maintenance  ~/Documents/IUT/SWE 8th Sem/SWE 4802/AddressBook-Maintenance, module, Value: 0
+							66 text (selectable) .github
+							67 text (selectable) .gradle, excluded directory
+							68 text (selectable) .idea
+							69 text (selectable) build, excluded directory
+							70 text (selectable) config
+							71 text (selectable) data
+							72 text (selectable) docs
+							73 text (selectable) gradle
+							74 text (selectable) maintenance
+							75 text (selectable) src
+								76 text (selectable) main, module
+									77 text (selectable) java, sources root
+									78 text (selectable) resources, resources root
+								79 text (selectable) test, module
+							80 text (selectable) .gitattributes
+							81 text (selectable) .gitignore
+							82 text (selectable) addressbook.log.0
+							83 text (selectable) addressbook.log.0.1
+							84 text (selectable) build.gradle
+							85 text (selectable) copyright.txt
+							86 text (selectable) gradle.properties, properties file
+							87 text (selectable) gradlew
+							88 text (selectable) gradlew.bat
+							89 text (selectable) LICENSE
+							90 text (selectable) preferences.json, JSON file
+							91 text (selectable) README.md
+							92 text (selectable) START-HERE.md
+					93 row (selected) Description: .github, Value: 0
+						94 text (selectable) .github
+					95 row (selected) Description: .gradle, excluded directory, Value: 0
+						96 text (selectable) .gradle, excluded directory
+					97 row (selected) Description: .idea, Value: 0
+						98 text (selectable) .idea
+					99 row (selected) Description: build, excluded directory, Value: 0
+						100 text (selectable) build, excluded directory
+					101 row (selected) Description: config, Value: 0
+						102 text (selectable) config
+					103 row (selected) Description: data, Value: 0
+						104 text (selectable) data
+					105 row (selected) Description: docs, Value: 0
+						106 text (selectable) docs
+					107 row (selected) Description: gradle, Value: 0
+						108 text (selectable) gradle
+					109 row (selected) Description: maintenance, Value: 0
+						110 text (selectable) maintenance
+					111 row (selected) Description: src, Value: 0
+						112 text (selectable) Description: src, Value: 0
+							113 text (selectable) main, module
+								114 text (selectable) java, sources root
+								115 text (selectable) resources, resources root
+							116 text (selectable) test, module
+					117 row (selected) Description: main, module, Value: 0
+						118 text (selectable) Description: main, module, Value: 0
+							119 text (selectable) java, sources root
+							120 text (selectable) resources, resources root
+					121 row (selected) Description: java, sources root, Value: 0
+						122 text (selectable) java, sources root
+					123 row (selected) Description: resources, resources root, Value: 0
+						124 text (selectable) resources, resources root
+					125 row (selected) Description: test, module, Value: 0
+						126 text (selectable) test, module
+					127 row (selected) Description: .gitattributes, Value: 0
+						128 text (selectable) .gitattributes
+					129 row (selected) Description: .gitignore, Value: 0
+						130 text (selectable) .gitignore
+					131 row (selected) Description: addressbook.log.0, Value: 0
+						132 text (selectable) addressbook.log.0
+					133 row (selected) Description: addressbook.log.0.1, Value: 0
+						134 text (selectable) addressbook.log.0.1
+					135 row (selected) Description: build.gradle, Value: 0
+						136 text (selectable) build.gradle
+					137 row (selected) Description: copyright.txt, Value: 0
+						138 text (selectable) copyright.txt
+					139 row (selected) Description: gradle.properties, properties file, Value: 0
+						140 text (selectable) gradle.properties, properties file
+					141 row (selected) Description: gradlew, Value: 0
+						142 text (selectable) gradlew
+					143 row (selected) Description: gradlew.bat, Value: 0
+						144 text (selectable) gradlew.bat
+					145 row (selected) Description: LICENSE, Value: 0
+						146 text (selectable) LICENSE
+					147 row (selected) Description: preferences.json, JSON file, Value: 0
+						148 text (selectable) preferences.json, JSON file
+					149 row (selected) Description: README.md, Value: 0
+						150 text (selectable) README.md
+					151 row (selected) Description: START-HERE.md, Value: 0
+						152 text (selectable) START-HERE.md
+					153 row (selected) Description: External Libraries, external library, Value: 0
+						154 text (selectable) External Libraries, external library
+					155 row (selected) Description: Scratches and Consoles, Value: 0
+						156 text (selectable) Scratches and Consoles
+		157 container (selectable) Description: readJsonFile(Path, Class<T>) in Project Files Tool Window, Value: 0
+			158 text (selectable) Find
+			159 text (selectable) readJsonFile(Path, Class<T>) in Project Files
+			160 container (selectable) Description: Action Toolbar, Value: 0
+				161 button (selectable) Options
+				162 button (selectable) Hide
+			163 container (selectable) Description: Action Toolbar, Value: 0
+				164 button (selectable) Rerun
+				165 button (selectable) Previous Occurrence
+				166 button (selectable) Next Occurrence
+				167 button (selectable) Settings…
+				168 button (selectable) Group By
+				169 button (selectable) Show Read Access
+				170 button (selectable) Show Write Access
+				171 button (selectable) Show Results In Generated Code
+				172 button (selectable) Show Import Statements
+				173 button (selectable) Show Usages in Comments
+				174 button (selectable) Expand All
+				175 button (selectable) Collapse All
+				176 button (selectable) Preview Source
+			177 scroll area (selectable) 0
+				178 outline (selectable) Description: Usages, Value: 0
+					179 row (selected) Description: Method, Value: 0
+						180 text (selectable) Description: Method, Value: 0
+							181 text (selectable) readJsonFile(Path, Class<T>) of seedu.address.commons.util.JsonUtil, public static method
+					182 row (selected) Description: readJsonFile(Path, Class<T>) of seedu.address.commons.util.JsonUtil, public static method, Value: 0
+						183 text (selectable) readJsonFile(Path, Class<T>) of seedu.address.commons.util.JsonUtil, public static method
+					184 row (selected) Description: Usages or usages of base method in Project Files   6 results, Value: 0
+						185 text (selectable) Usages or usages of base method in Project Files   6 results
+					186 row (selected) Description: Dynamic usages in Project Files   1 result, Value: 0
+						187 text (selectable) Dynamic usages in Project Files   1 result
+				188 scroll bar (selectable)
+				189 scroll bar (selectable)
+			190 tab group (selectable, settable, unknown) Preview
+				191 scroll area (selectable) 0
+					192 scroll bar (selectable)
+					193 scroll bar (selectable)
+					194 link (selectable) JsonUserPrefsStorage.java
+					195 text (selectable)
+						196 scroll area (selectable) 0
+							197 container (selectable)
+							198 text (selectable)
+							199 scroll bar (selectable)
+							200 scroll bar (selectable)
+							201 container (selectable)
+							202 text entry area (selectable, settable) Description: Editor, Value: * @throws DataLoadingException if the file format is not as expected.
+     */
+    public Optional<UserPrefs> readUserPrefs(Path prefsFilePath) throws DataLoadingException {
+        return JsonUtil.readJsonFile(prefsFilePath, UserPrefs.class);
+    }
+
+    /**
+					203 link (selectable) JsonSerializableAddressBookTest.java
+					204 text (selectable)
+						205 scroll area (selectable) 0
+							206 container (selectable)
+							207 text (selectable)
+							208 scroll bar (selectable)
+							209 scroll bar (selectable)
+							210 container (selectable)
+							211 text entry area (selectable, settable) Description: Editor, Value: @Test
+    public void toModelType_typicalPersonsFile_success() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
+                JsonSerializableAddressBook.class).get();
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+					212 link (selectable) JsonAddressBookStorage.java
+					213 text (selectable)
+						214 scroll area (selectable) 0
+							215 container (selectable)
+							216 text (selectable)
+							217 scroll bar (selectable)
+							218 scroll bar (selectable)
+							219 container (selectable)
+							220 text entry area (selectable, settable) Description: Editor, Value: public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+        requireNonNull(filePath);
+
+        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
+                filePath, JsonSerializableAddressBook.class);
+        if (!jsonAddressBook.isPresent()) {
+            return Optional.empty();
+					221 link (selectable) JsonUtilTest.java
+					222 text (selectable)
+						223 scroll area (selectable) 0
+							224 container (selectable)
+							225 text (selectable)
+							226 scroll bar (selectable)
+							227 scroll bar (selectable)
+							228 container (selectable)
+							229 text entry area (selectable, settable) Description: Editor, Value: public void readJsonFile_nullDocument_throwsDataLoadingException(@TempDir Path directory) throws IOException {
+        Path file = directory.resolve("null.json");
+        Files.writeString(file, "null");
+        assertThrows(DataLoadingException.class, () -> JsonUtil.readJsonFile(file, SerializableTestClass.class));
+    }
+
+    //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
+					230 link (selectable) JsonSerializableAddressBookTest.java
+					231 text (selectable)
+						232 scroll area (selectable) 0
+							233 container (selectable)
+							234 text (selectable)
+							235 scroll bar (selectable)
+							236 scroll bar (selectable)
+							237 container (selectable)
+							238 text entry area (selectable, settable) Description: Editor, Value: @Test
+    public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+					239 link (selectable) JsonSerializableAddressBookTest.java
+					240 text (selectable)
+						241 scroll area (selectable) 0
+							242 container (selectable)
+							243 text (selectable)
+							244 scroll bar (selectable)
+							245 scroll bar (selectable)
+							246 container (selectable)
+							247 text entry area (selectable, settable) Description: Editor, Value: @Test
+    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
+                dataFromFile::toModelType);
+				248 text (selectable) 6 results
+				249 container (selectable) Description: Action Toolbar, Value: 0
+					250 button (selectable) Refresh
+		251 container (selectable) Description: Left Toolbar, Value: 0
+			252 button (selectable) Project
+			253 button (selectable) Structure
+			254 button (selectable) Commit
+			255 button (selectable) Pull Requests
+			256 button (selectable) More
+			257 button (selectable) Problems
+			258 button (selectable) Terminal
+			259 button (selectable) Services
+			260 button (selectable) Git
+			261 button (selectable) Find
+		262 container (selectable) Description: Right Toolbar, Value: 0
+			263 button (selectable) Notifications
+			264 button (selectable) AI Chat
+			265 button (selectable) Gradle
+			266 button (selectable) Database
+			267 button (selectable, disabled) More
+		268 container (selectable) Description: Status Bar, Value: 0
+			269 scroll area (selectable) 0
+				270 container (selectable) Description: Navigation Bar, Value: 0
+					271 button (selectable) AddressBook-Maintenance
+					272 button (selectable) src
+					273 button (selectable) main
+					274 button (selectable) java
+					275 button (selectable) seedu
+					276 button (selectable) address
+					277 button (selectable) storage
+					278 button (selectable) JsonAddressBookStorage
+				279 scroll bar (selectable)
+				280 scroll bar (selectable)
+			281 progress indicator (selectable) Description: Background process, Help: Click to see all running processes, Value: 0
+				282 button (selectable) Hide processes (1)
+				283 text (selectable)
+			284 button (selectable)
+			285 button (selectable)
+			286 button (selectable)
+			287 button (selectable) Description: 51:42, Help: Go to Line
+			288 button (selectable) Language Services Button
+			289 button (selectable) Description: LF, Help: Line Separator: \n
+			290 button (selectable) Description: UTF-8, Help: File Encoding: UTF-8
+			291 button (selectable) Column selection mode
+			292 button (selectable) Description: 4 spaces, Help: Indent: 4 spaces
+				293 image (selectable)
+				294 button (selectable) 4 spaces
+			295 button (selectable)
+			296 button (selectable)
+			297 button (selectable) Make file read-only
+			298 button (selectable) Description: IDE error occurred, Help: See details and submit report
+				299 image (selectable)
+	300 close button
+	301 full screen button Help: this button also has an action to zoom the window, Secondary Actions: zoom the window
+	302 minimize button
+303 menu bar
+	304 IntelliJ IDEA
+	305 File, ID: handleAction:
+	306 Edit, ID: handleAction:
+	307 View, ID: handleAction:
+	308 Navigate, ID: handleAction:
+	309 Code, ID: handleAction:
+	310 Refactor, ID: handleAction:
+	311 Build, ID: handleAction:
+	312 Run, ID: handleAction:
+	313 Tools, ID: handleAction:
+	314 Git, ID: handleAction:
+	315 Window, ID: handleAction:
+	316 Help, ID: handleAction:
+
+Selected:
+	317 row (selected) Description: Usages or usages of base method in Project Files   6 results, Value: 0
+		318 text (selectable) Usages or usages of base method in Project Files   6 results
+
+Note: Pay special attention to the content selected by the user. If the user asks a question or refers to the content they are looking at on-screen, they might be referring to the selected content (but they might be referring to something else that's visible, too).

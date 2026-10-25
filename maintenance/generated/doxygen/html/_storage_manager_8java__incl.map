@@ -1,0 +1,21 @@
+<map id="src/main/java/seedu/address/storage/StorageManager.java" name="src/main/java/seedu/address/storage/StorageManager.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="606,5,850,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,102,141,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="602,38,394,62,153,97,135,100,134,95,153,91,393,57,607,37"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="164,102,283,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="602,43,457,67,296,97,282,100,281,95,295,91,456,62,608,42"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="307,102,426,127"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="642,46,438,97,425,100,425,94,436,91,636,47"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="449,102,604,127"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="685,46,569,98,568,93,679,47"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="628,94,828,135"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="730,45,730,80,726,77,726,48"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="852,94,1091,135"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="783,44,905,89,899,88,783,49"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1115,94,1295,135"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="839,44,1102,93,1097,94,838,49"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1319,94,1499,135"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="850,36,1059,59,1306,93,1301,93,1058,64,850,41"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1523,94,1700,135"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="850,31,1146,52,1325,69,1510,94,1505,94,1325,74,1146,57,850,36"/>
+</map>

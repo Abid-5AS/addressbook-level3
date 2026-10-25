@@ -1,0 +1,10 @@
+<map id="seedu.address.commons.exceptions.DataLoadingException.DataLoadingException" name="seedu.address.commons.exceptions.DataLoadingException.DataLoadingException">
+<area shape="rect" id="Node000001" title=" " alt="" coords="545,35,832,75"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1storage_1_1_json_address_book_storage.html#a08c7923bcf71712ec263ad590a2dfdda" title=" " alt="" coords="5,5,257,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="527,49,257,35,257,30,531,45"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1commons_1_1util_1_1_json_util.html#aa27290013eb27bb9684b13f1cebbad97" title=" " alt="" coords="305,63,497,103"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="532,70,498,76,497,71,527,71"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="287,60,230,49,230,44,292,59"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1storage_1_1_json_user_prefs_storage.html#a65976c25ccc4f3972a86f3aac80782d2" title=" " alt="" coords="24,71,238,111"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="286,87,238,90,238,85,292,86"/>
+</map>

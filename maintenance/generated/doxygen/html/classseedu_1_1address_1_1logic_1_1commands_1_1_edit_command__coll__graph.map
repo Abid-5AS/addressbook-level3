@@ -1,0 +1,17 @@
+<map id="seedu.address.logic.commands.EditCommand" name="seedu.address.logic.commands.EditCommand">
+<area shape="rect" id="Node000001" title=" " alt="" coords="748,71,957,111"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_command.html" title=" " alt="" coords="348,5,557,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="572,37,724,60,763,70,757,70,724,66,572,43"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1commons_1_1core_1_1index_1_1_index.html" title=" " alt="" coords="335,71,570,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="585,88,750,90,745,92,586,94"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="336,136,568,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="584,138,724,117,764,111,759,113,724,122,584,143"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1model_1_1person_1_1_name.html" title=" " alt="" coords="5,53,233,78"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="195,80,233,88,273,96,312,107,336,121,371,135,366,136,334,125,310,112,272,101,232,94,196,85"/>
+<area shape="rect" id="Node000006" href="$classseedu_1_1address_1_1model_1_1person_1_1_phone.html" title=" " alt="" coords="23,103,215,143"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="231,131,338,144,334,146,231,137"/>
+<area shape="rect" id="Node000007" href="$classseedu_1_1address_1_1model_1_1person_1_1_email.html" title=" " alt="" coords="23,168,215,209"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="231,179,310,173,338,172,333,173,311,178,231,185"/>
+<area shape="rect" id="Node000008" href="$classseedu_1_1address_1_1model_1_1person_1_1_address.html" title=" " alt="" coords="23,233,215,274"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="230,227,310,206,397,178,402,177,311,211,231,233"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="src/main/java/seedu/address/logic/Messages.java" name="src/main/java/seedu/address/logic/Messages.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="299,5,493,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,102,96,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="302,49,109,97,100,99,98,94,107,91,301,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="120,102,293,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="355,46,248,97,246,92,350,47"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="318,102,474,127"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="398,45,398,88,394,85,394,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="498,94,678,135"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="440,44,533,87,528,87,439,49"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="702,94,895,135"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="488,44,694,90,689,91,487,49"/>
+</map>

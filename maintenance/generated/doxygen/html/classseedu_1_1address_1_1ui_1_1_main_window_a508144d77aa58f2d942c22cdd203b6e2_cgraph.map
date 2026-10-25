@@ -1,0 +1,15 @@
+<map id="seedu.address.ui.MainWindow.executeCommand" name="seedu.address.ui.MainWindow.executeCommand">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,112,253,153"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_command_result.html#a1db8ccd3373bd923cc263952e746f47c" title=" " alt="" coords="314,5,554,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,109,232,82,300,55,325,49,321,52,302,60,234,87,174,114"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1ui_1_1_main_window.html#afe15872a550a970ff3ce00859f9eb711" title=" " alt="" coords="303,70,565,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="252,110,337,98,332,100,254,115"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1ui_1_1_main_window.html#a58a33b09b3bd1d71271ad6ed87395862" title=" " alt="" coords="301,120,567,145"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="253,130,288,132,283,133,254,135"/>
+<area shape="rect" id="Node000006" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_command_result.html#a020ad37e7c37caefee36fa255c738b6d" title=" " alt="" coords="329,169,538,210"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="241,151,317,167,312,168,241,156"/>
+<area shape="rect" id="Node000007" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_command_result.html#a3aef34e571efa64a72d0cb9bd7500228" title=" " alt="" coords="329,235,538,275"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="165,151,228,185,302,219,327,230,321,230,300,224,225,190,164,156"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html#a91f7e835bd6f8af846106871e8de18d2" title=" " alt="" coords="615,63,815,103"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="565,80,602,83,597,83,566,86"/>
+</map>

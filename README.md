@@ -1,3 +1,23 @@
+# SWE 4802 — AddressBook Maintenance
+
+Maintained se-edu AddressBook Level 3 with four scoped maintenance cases.
+
+- [Start here](START-HERE.md)
+- [Printable report](maintenance/AddressBook_Maintenance_Report.pdf)
+- [Maintenance activity matrix](maintenance/20-ACTIVITY-MATRIX.md)
+- [Tool evidence](maintenance/TOOL-EVIDENCE.md)
+
+```bash
+maintenance/tools/run-demo.sh
+maintenance/tools/verify.sh
+```
+
+The original project and MIT attribution are retained below. The selected local application toolchain is Java 21; other platform/runtime verification is limited as described in the report.
+
+---
+
+## Original project README
+
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 
 ![Ui](docs/images/Ui.png)

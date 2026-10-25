@@ -1,0 +1,9 @@
+<map id="seedu.address.logic.Messages.format" name="seedu.address.logic.Messages.format">
+<area shape="rect" id="Node000001" title=" " alt="" coords="263,78,505,104"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_add_command.html#ad8cb5bfc164978cb2117c46fc9c91f80" title=" " alt="" coords="5,5,215,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="310,75,198,49,198,44,314,73"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_delete_command.html#a02da105af83cbd2bce8e39fff166d7af" title=" " alt="" coords="5,71,215,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="245,92,216,94,215,88,250,90"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_edit_command.html#a7a0a62d6dec4fb8ea37aa247e9a82a59" title=" " alt="" coords="5,136,215,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="315,107,199,138,198,133,309,109"/>
+</map>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LogsCenter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.commons.core</a> &gt; <span class="el_source">LogsCenter.java</span></div><h1>LogsCenter.java</h1><pre class="source lang-java linenums">package seedu.address.commons.core;
+
+import static java.util.Objects.requireNonNull;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
+/**
+ * Configures and manages loggers and handlers, including their logging level.
+ * Named {@link Logger}s can be obtained from this class.&lt;br&gt;
+ * These loggers have been configured to output messages to the console and a {@code .log} file by default,
+ *   at the {@code INFO} level. A new {@code .log} file with a new numbering will be created after the log
+ *   file reaches 5MB in size, up to a maximum of 5 files.&lt;br&gt;
+ */
+<span class="nc" id="L20">public class LogsCenter {</span>
+    // Change this to a lower level (e.g., Level.FINE) to enable more detailed log messages
+<span class="fc" id="L22">    private static final Level LOG_LEVEL = Level.INFO;</span>
+
+    private static final int MAX_FILE_COUNT = 5;
+<span class="fc" id="L25">    private static final int MAX_FILE_SIZE_IN_BYTES = (int) (Math.pow(2, 20) * 5); // 5MB</span>
+    private static final String LOG_FILE = &quot;addressbook.log&quot;;
+    private static final Logger logger; // logger for this class
+    private static Logger baseLogger; // to be used as the parent of all other loggers created by this class.
+
+    // This static block ensures essential loggers are created early
+    static {
+<span class="fc" id="L32">        setBaseLogger();</span>
+<span class="fc" id="L33">        logger = LogsCenter.getLogger(LogsCenter.class);</span>
+<span class="fc" id="L34">    }</span>
+
+    /**
+     * Creates a logger with the given name prefixed by the {@code baseLogger}'s name so that the created logger
+     * becomes a descendant of the {@code baseLogger}. Furthermore, the returned logger will have the same log handlers
+     * as the {@code baseLogger}.
+     */
+    public static Logger getLogger(String name) {
+        // Java organizes loggers into a hierarchy based on their names (using '.' as a separator, similar to how Java
+        // packages form a hierarchy). Furthermore, loggers without a level inherit the level of their parent logger.
+        // By prefixing names of all loggers with baseLogger's name + &quot;.&quot;, we make the baseLogger the parent of all
+        // loggers. This allows us to change the level of all loggers simply by changing the baseLogger level.
+<span class="fc" id="L46">        Logger logger = Logger.getLogger(baseLogger.getName() + &quot;.&quot; + name);</span>
+<span class="fc" id="L47">        removeHandlers(logger);</span>
+<span class="fc" id="L48">        logger.setUseParentHandlers(true);</span>
+<span class="fc" id="L49">        return logger;</span>
+    }
+
+    /**
+     * Creates a Logger for the given class name.
+     */
+    public static &lt;T&gt; Logger getLogger(Class&lt;T&gt; clazz) {
+<span class="fc" id="L56">        requireNonNull(clazz);</span>
+<span class="fc" id="L57">        return getLogger(clazz.getSimpleName());</span>
+    }
+
+    /**
+     * Removes all handlers from the {@code logger}.
+     */
+    private static void removeHandlers(Logger logger) {
+<span class="fc" id="L64">        Arrays.stream(logger.getHandlers())</span>
+<span class="fc" id="L65">                .forEach(logger::removeHandler);</span>
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * Creates a logger named 'ab3', containing a {@code ConsoleHandler} and a {@code FileHandler}.
+     * Sets it as the {@code baseLogger}, to be used as the parent logger of all other loggers.
+     */
+    private static void setBaseLogger() {
+<span class="fc" id="L73">        baseLogger = Logger.getLogger(&quot;ab3&quot;);</span>
+<span class="fc" id="L74">        baseLogger.setUseParentHandlers(false);</span>
+<span class="fc" id="L75">        removeHandlers(baseLogger);</span>
+        // set the level of the baseLogger, which will be inherited by other loggers
+<span class="fc" id="L77">        baseLogger.setLevel(LOG_LEVEL);</span>
+
+        // Level.ALL is used as the level for the handlers because the baseLogger filters the log messages by level
+        // already; there is no need to control log message level of the handlers.
+
+        // add a ConsoleHandler to log to the console
+<span class="fc" id="L83">        ConsoleHandler consoleHandler = new ConsoleHandler();</span>
+<span class="fc" id="L84">        consoleHandler.setLevel(Level.ALL);</span>
+<span class="fc" id="L85">        baseLogger.addHandler(consoleHandler);</span>
+
+        // add a FileHandler to log to a file
+        try {
+<span class="fc" id="L89">            FileHandler fileHandler = new FileHandler(LOG_FILE, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);</span>
+<span class="fc" id="L90">            fileHandler.setFormatter(new SimpleFormatter());</span>
+<span class="fc" id="L91">            fileHandler.setLevel(Level.ALL);</span>
+<span class="fc" id="L92">            baseLogger.addHandler(fileHandler);</span>
+<span class="nc" id="L93">        } catch (IOException e) {</span>
+<span class="nc" id="L94">            logger.warning(&quot;Error adding file handler for logger.&quot;);</span>
+<span class="fc" id="L95">        }</span>
+<span class="fc" id="L96">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

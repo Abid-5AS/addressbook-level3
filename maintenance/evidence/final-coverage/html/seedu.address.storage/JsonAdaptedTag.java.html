@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JsonAdaptedTag.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.storage</a> &gt; <span class="el_source">JsonAdaptedTag.java</span></div><h1>JsonAdaptedTag.java</h1><pre class="source lang-java linenums">package seedu.address.storage;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Jackson-friendly version of {@link Tag}.
+ */
+class JsonAdaptedTag {
+
+    private final String tagName;
+
+    /**
+     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     */
+    @JsonCreator
+<span class="fc" id="L20">    public JsonAdaptedTag(String tagName) {</span>
+<span class="fc" id="L21">        this.tagName = tagName;</span>
+<span class="fc" id="L22">    }</span>
+
+    /**
+     * Converts a given {@code Tag} into this class for Jackson use.
+     */
+<span class="fc" id="L27">    public JsonAdaptedTag(Tag source) {</span>
+<span class="fc" id="L28">        tagName = source.tagName;</span>
+<span class="fc" id="L29">    }</span>
+
+    @JsonValue
+    public String getTagName() {
+<span class="fc" id="L33">        return tagName;</span>
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     */
+    public Tag toModelType() throws IllegalValueException {
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (!Tag.isValidTagName(tagName)) {</span>
+<span class="fc" id="L43">            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);</span>
+        }
+<span class="fc" id="L45">        return new Tag(tagName);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

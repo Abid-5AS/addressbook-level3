@@ -1,0 +1,8 @@
+jsonFile = requireDocumentValue(deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize));
+    jsonFile = requireDocumentValue(deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize));
+        jsonFile = requireDocumentValue(deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize));
+            return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
+                ...
+        return value;
+            private static <T> T requireDocumentValue(T value) throws IOException {
+                ...

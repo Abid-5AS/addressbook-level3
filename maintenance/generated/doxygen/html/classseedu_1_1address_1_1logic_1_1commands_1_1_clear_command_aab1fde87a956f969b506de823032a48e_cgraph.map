@@ -1,0 +1,7 @@
+<map id="seedu.address.logic.commands.ClearCommand.execute" name="seedu.address.logic.commands.ClearCommand.execute">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,215,79"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1model_1_1_address_book.html#a713d75f1e60e75ffd818784f55045da9" title=" " alt="" coords="275,5,472,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,43,262,39,256,41,216,48"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_command_result.html#a1452846378a6cda06bfc88adfc872364" title=" " alt="" coords="263,71,484,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,69,250,76,244,76,215,74"/>
+</map>

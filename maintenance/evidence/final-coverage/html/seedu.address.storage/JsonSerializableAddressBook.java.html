@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JsonSerializableAddressBook.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.storage</a> &gt; <span class="el_source">JsonSerializableAddressBook.java</span></div><h1>JsonSerializableAddressBook.java</h1><pre class="source lang-java linenums">package seedu.address.storage;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
+
+/**
+ * An Immutable AddressBook that is serializable to JSON format.
+ */
+@JsonRootName(value = &quot;addressbook&quot;)
+class JsonSerializableAddressBook {
+
+    public static final String MESSAGE_DUPLICATE_PERSON = &quot;Persons list contains duplicate person(s).&quot;;
+
+<span class="fc" id="L24">    private final List&lt;JsonAdaptedPerson&gt; persons = new ArrayList&lt;&gt;();</span>
+
+    /**
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     */
+    @JsonCreator
+<span class="fc" id="L30">    public JsonSerializableAddressBook(@JsonProperty(&quot;persons&quot;) List&lt;JsonAdaptedPerson&gt; persons) {</span>
+<span class="fc" id="L31">        this.persons.addAll(persons);</span>
+<span class="fc" id="L32">    }</span>
+
+    /**
+     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     *
+     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     */
+<span class="fc" id="L39">    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {</span>
+<span class="fc" id="L40">        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));</span>
+<span class="fc" id="L41">    }</span>
+
+    /**
+     * Converts this address book into the model's {@code AddressBook} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    public AddressBook toModelType() throws IllegalValueException {
+<span class="fc" id="L49">        AddressBook addressBook = new AddressBook();</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {</span>
+<span class="fc" id="L51">            Person person = jsonAdaptedPerson.toModelType();</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            if (addressBook.hasPerson(person)) {</span>
+<span class="fc" id="L53">                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);</span>
+            }
+<span class="fc" id="L55">            addressBook.addPerson(person);</span>
+<span class="fc" id="L56">        }</span>
+<span class="fc" id="L57">        return addressBook;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

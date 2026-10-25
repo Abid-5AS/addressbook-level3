@@ -1,0 +1,17 @@
+<map id="src/main/java/seedu/address/ui/PersonCard.java" name="src/main/java/seedu/address/ui/PersonCard.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="520,5,706,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,102,144,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="517,39,350,64,156,97,139,100,138,95,155,91,349,59,522,38"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="168,102,293,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="522,46,306,97,292,100,291,95,305,91,517,47"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="317,102,490,127"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="568,46,448,98,446,93,563,47"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="515,102,711,127"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="615,45,615,88,611,84,611,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="736,102,907,127"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="661,44,781,95,776,95,660,49"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="932,102,1111,127"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="707,44,952,98,946,98,706,49"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1134,94,1327,135"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="707,35,1121,93,1116,94,707,41"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="seedu.address.model.AddressBook.AddressBook" name="seedu.address.model.AddressBook.AddressBook">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,203,79"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1model_1_1_address_book.html#aad9cb31ad701ed592600b3b293031fab" title=" " alt="" coords="251,39,448,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,56,238,59,232,59,203,62"/>
+<area shape="rect" id="Node000003" href="$interfaceseedu_1_1address_1_1model_1_1_read_only_address_book.html#a1bb6ee02f8e5514d069648c1c9b64ec5" title=" " alt="" coords="496,5,706,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="448,43,483,41,478,42,449,49"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1model_1_1_address_book.html#a5ea7d1820ce9bbc99f8e1f02316a7dcf" title=" " alt="" coords="502,71,700,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="449,69,490,77,484,76,448,74"/>
+</map>

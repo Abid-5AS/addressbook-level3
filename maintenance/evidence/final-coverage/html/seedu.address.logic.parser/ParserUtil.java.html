@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParserUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic.parser</a> &gt; <span class="el_source">ParserUtil.java</span></div><h1>ParserUtil.java</h1><pre class="source lang-java linenums">package seedu.address.logic.parser;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Contains utility methods used for parsing strings in the various *Parser classes.
+ */
+<span class="nc" id="L21">public class ParserUtil {</span>
+
+    public static final String MESSAGE_INVALID_INDEX = &quot;Index must be a positive integer.&quot;;
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not a non-zero unsigned integer).
+     */
+    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+<span class="fc" id="L31">        String trimmedIndex = oneBasedIndex.trim();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {</span>
+<span class="fc" id="L33">            throw new ParseException(MESSAGE_INVALID_INDEX);</span>
+        }
+<span class="fc" id="L35">        return Index.fromOneBased(Integer.parseInt(trimmedIndex));</span>
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Name parseName(String name) throws ParseException {
+<span class="fc" id="L45">        requireNonNull(name);</span>
+<span class="fc" id="L46">        String trimmedName = name.trim();</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (!Name.isValidName(trimmedName)) {</span>
+<span class="fc" id="L48">            throw new ParseException(Name.MESSAGE_CONSTRAINTS);</span>
+        }
+<span class="fc" id="L50">        return new Name(trimmedName);</span>
+    }
+
+    /**
+     * Parses a {@code String phone} into a {@code Phone}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code phone} is invalid.
+     */
+    public static Phone parsePhone(String phone) throws ParseException {
+<span class="fc" id="L60">        requireNonNull(phone);</span>
+<span class="fc" id="L61">        String trimmedPhone = phone.trim();</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (!Phone.isValidPhone(trimmedPhone)) {</span>
+<span class="fc" id="L63">            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);</span>
+        }
+<span class="fc" id="L65">        return new Phone(trimmedPhone);</span>
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static Address parseAddress(String address) throws ParseException {
+<span class="fc" id="L75">        requireNonNull(address);</span>
+<span class="fc" id="L76">        String trimmedAddress = address.trim();</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (!Address.isValidAddress(trimmedAddress)) {</span>
+<span class="fc" id="L78">            throw new ParseException(Address.MESSAGE_CONSTRAINTS);</span>
+        }
+<span class="fc" id="L80">        return new Address(trimmedAddress);</span>
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Email parseEmail(String email) throws ParseException {
+<span class="fc" id="L90">        requireNonNull(email);</span>
+<span class="fc" id="L91">        String trimmedEmail = email.trim();</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (!Email.isValidEmail(trimmedEmail)) {</span>
+<span class="fc" id="L93">            throw new ParseException(Email.MESSAGE_CONSTRAINTS);</span>
+        }
+<span class="fc" id="L95">        return new Email(trimmedEmail);</span>
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Tag parseTag(String tag) throws ParseException {
+<span class="fc" id="L105">        requireNonNull(tag);</span>
+<span class="fc" id="L106">        String trimmedTag = tag.trim();</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        if (!Tag.isValidTagName(trimmedTag)) {</span>
+<span class="fc" id="L108">            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);</span>
+        }
+<span class="fc" id="L110">        return new Tag(trimmedTag);</span>
+    }
+
+    /**
+     * Parses {@code Collection&lt;String&gt; tags} into a {@code Set&lt;Tag&gt;}.
+     */
+    public static Set&lt;Tag&gt; parseTags(Collection&lt;String&gt; tags) throws ParseException {
+<span class="fc" id="L117">        requireNonNull(tags);</span>
+<span class="fc" id="L118">        final Set&lt;Tag&gt; tagSet = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        for (String tagName : tags) {</span>
+<span class="fc" id="L120">            tagSet.add(parseTag(tagName));</span>
+<span class="fc" id="L121">        }</span>
+<span class="fc" id="L122">        return tagSet;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

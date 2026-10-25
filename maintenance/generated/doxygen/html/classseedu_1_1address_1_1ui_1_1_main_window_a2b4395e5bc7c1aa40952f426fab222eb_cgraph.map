@@ -1,0 +1,9 @@
+<map id="seedu.address.ui.MainWindow.setWindowDefaultSize" name="seedu.address.ui.MainWindow.setWindowDefaultSize">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,71,225,111"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html#adac2ded58ff1bc4da98739eda77b358a" title=" " alt="" coords="273,5,501,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,68,287,49,282,51,203,73"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html#a789fedd8b2a9927b49c83729d34659b5" title=" " alt="" coords="287,71,487,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,88,274,90,269,92,225,94"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html#adac1cb9d9ddb4cd78f2b51b875296e2b" title=" " alt="" coords="287,136,487,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="203,109,287,131,282,132,202,115"/>
+</map>

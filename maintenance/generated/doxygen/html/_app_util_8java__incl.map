@@ -1,0 +1,9 @@
+<map id="src/main/java/seedu/address/commons/util/AppUtil.java" name="src/main/java/seedu/address/commons/util/AppUtil.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="198,5,352,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,164,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,61,139,104,137,99,217,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="188,116,362,142"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="277,60,277,103,273,100,273,63"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="386,116,548,142"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="331,59,432,109,426,109,330,64"/>
+</map>

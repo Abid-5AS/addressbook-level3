@@ -1,0 +1,7 @@
+3c62f6b2 Extract tag-query parsing using IntelliJ refactoring
+03bf56f6 Document tag search in the command usage message
+c0060abb Extract JSON document validation from storage error handling
+7268979e Add exact case-insensitive tag search using the existing find pipeline
+dd9d211b Stage JSON saves before atomic replacement to preserve existing data
+7110f09a Handle JSON null through the existing data-loading error path
+ddedfbc2 Adapt lab build to Java 21 and host JavaFX natives

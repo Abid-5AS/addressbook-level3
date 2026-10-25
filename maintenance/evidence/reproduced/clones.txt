@@ -1,0 +1,43 @@
+Found a 14 line (58 tokens) duplication in the following files: 
+Starting at line 226 of /Users/md.abidshahriar/Documents/IUT/SWE 8th Sem/SWE 4802/AddressBook-Maintenance/src/main/java/seedu/address/logic/commands/EditCommand.java
+Starting at line 102 of /Users/md.abidshahriar/Documents/IUT/SWE 8th Sem/SWE 4802/AddressBook-Maintenance/src/main/java/seedu/address/model/person/Person.java
+
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("email", email)
+                    .add("address", address)
+                    .add("tags", tags)
+                    .toString();
+        }
+    }
+
+=====================================================================
+Found a 17 line (50 tokens) duplication in the following files: 
+Starting at line 36 of /Users/md.abidshahriar/Documents/IUT/SWE 8th Sem/SWE 4802/AddressBook-Maintenance/src/main/java/seedu/address/model/person/Address.java
+Starting at line 50 of /Users/md.abidshahriar/Documents/IUT/SWE 8th Sem/SWE 4802/AddressBook-Maintenance/src/main/java/seedu/address/model/person/Email.java
+Starting at line 32 of /Users/md.abidshahriar/Documents/IUT/SWE 8th Sem/SWE 4802/AddressBook-Maintenance/src/main/java/seedu/address/model/person/Phone.java
+
+    public static boolean isValidAddress(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Address otherAddress)) {
+

@@ -1,0 +1,9 @@
+<map id="seedu.address.model.UserPrefs.equals" name="seedu.address.model.UserPrefs.equals">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,183,79"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html#af1f0c3da6f8090c81003c884a1626a83" title=" " alt="" coords="231,5,431,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,44,218,41,212,43,184,49"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1model_1_1_user_prefs.html#a078bdf2aae469beb1026f61170393b91" title=" " alt="" coords="242,71,420,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="183,68,229,77,224,77,183,74"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html#a91f7e835bd6f8af846106871e8de18d2" title=" " alt="" coords="479,5,679,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="431,23,466,25,461,26,432,28"/>
+</map>

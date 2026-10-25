@@ -1,0 +1,16 @@
+<map id="seedu.address.model.person.Person.getAddress" name="seedu.address.model.person.Person.getAddress">
+<area shape="rect" id="Node000001" title=" " alt="" coords="553,69,745,110"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_edit_command.html#a89cd2a6ed611de92d29246c51b38972d" title=" " alt="" coords="273,8,495,49"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="541,65,475,52,475,47,546,65"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1logic_1_1_messages.html#a0d339c8c1bb08020775f0bb0e6c01d48" title=" " alt="" coords="263,77,505,102"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="535,90,506,92,505,87,540,89"/>
+<area shape="rect" id="Node000007" href="$classseedu_1_1address_1_1ui_1_1_person_card.html#a30cf9a5c2db3a2338a5f46b2fe3aa196" title=" " alt="" coords="285,127,482,167"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="540,113,482,129,481,123,535,114"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_edit_command.html#a7a0a62d6dec4fb8ea37aa247e9a82a59" title=" " alt="" coords="5,5,215,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="255,28,216,29,214,24,260,26"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="309,74,200,49,200,44,313,72"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_add_command.html#ad8cb5bfc164978cb2117c46fc9c91f80" title=" " alt="" coords="5,71,215,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="245,91,216,93,215,88,250,90"/>
+<area shape="rect" id="Node000006" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_delete_command.html#a02da105af83cbd2bce8e39fff166d7af" title=" " alt="" coords="5,136,215,177"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="298,107,263,118,185,138,184,133,262,112,304,106"/>
+</map>

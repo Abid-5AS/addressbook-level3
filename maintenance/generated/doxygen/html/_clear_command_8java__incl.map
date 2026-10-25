@@ -1,0 +1,9 @@
+<map id="src/main/java/seedu/address/logic/commands/ClearCommand.java" name="src/main/java/seedu/address/logic/commands/ClearCommand.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="217,5,387,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,164,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,61,145,105,143,100,236,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="188,116,416,142"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="304,60,304,103,300,100,300,63"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="439,116,623,142"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="369,59,490,110,485,110,368,64"/>
+</map>

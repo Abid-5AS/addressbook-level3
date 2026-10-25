@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ModelManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.model</a> &gt; <span class="el_source">ModelManager.java</span></div><h1>ModelManager.java</h1><pre class="source lang-java linenums">package seedu.address.model;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Person;
+
+/**
+ * Represents the in-memory model of the address book data.
+ */
+public class ModelManager implements Model {
+<span class="fc" id="L19">    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);</span>
+
+    private final AddressBook addressBook;
+    private final UserPrefs userPrefs;
+    private final FilteredList&lt;Person&gt; filteredPersons;
+
+    /**
+     * Initializes a ModelManager with the given addressBook and userPrefs.
+     */
+<span class="fc" id="L28">    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {</span>
+<span class="fc" id="L29">        requireAllNonNull(addressBook, userPrefs);</span>
+
+<span class="fc" id="L31">        logger.fine(&quot;Initializing with address book: &quot; + addressBook + &quot; and user prefs &quot; + userPrefs);</span>
+
+<span class="fc" id="L33">        this.addressBook = new AddressBook(addressBook);</span>
+<span class="fc" id="L34">        this.userPrefs = new UserPrefs(userPrefs);</span>
+<span class="fc" id="L35">        filteredPersons = new FilteredList&lt;&gt;(this.addressBook.getPersonList());</span>
+<span class="fc" id="L36">    }</span>
+
+    public ModelManager() {
+<span class="fc" id="L39">        this(new AddressBook(), new UserPrefs());</span>
+<span class="fc" id="L40">    }</span>
+
+    //=========== UserPrefs ==================================================================================
+
+    @Override
+    public ReadOnlyUserPrefs getUserPrefs() {
+<span class="fc" id="L46">        return userPrefs;</span>
+    }
+
+    @Override
+    public GuiSettings getGuiSettings() {
+<span class="fc" id="L51">        return userPrefs.getGuiSettings();</span>
+    }
+
+    @Override
+    public void setGuiSettings(GuiSettings guiSettings) {
+<span class="fc" id="L56">        requireNonNull(guiSettings);</span>
+<span class="fc" id="L57">        userPrefs.setGuiSettings(guiSettings);</span>
+<span class="fc" id="L58">    }</span>
+
+    //=========== AddressBook ================================================================================
+
+    @Override
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+<span class="fc" id="L64">        this.addressBook.resetData(addressBook);</span>
+<span class="fc" id="L65">    }</span>
+
+    @Override
+    public ReadOnlyAddressBook getAddressBook() {
+<span class="fc" id="L69">        return addressBook;</span>
+    }
+
+    @Override
+    public boolean hasPerson(Person person) {
+<span class="fc" id="L74">        requireNonNull(person);</span>
+<span class="fc" id="L75">        return addressBook.hasPerson(person);</span>
+    }
+
+    @Override
+    public void deletePerson(Person target) {
+<span class="fc" id="L80">        addressBook.removePerson(target);</span>
+<span class="fc" id="L81">    }</span>
+
+    @Override
+    public void addPerson(Person person) {
+<span class="fc" id="L85">        addressBook.addPerson(person);</span>
+<span class="fc" id="L86">        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);</span>
+<span class="fc" id="L87">    }</span>
+
+    @Override
+    public void setPerson(Person target, Person editedPerson) {
+<span class="fc" id="L91">        requireAllNonNull(target, editedPerson);</span>
+
+<span class="fc" id="L93">        addressBook.setPerson(target, editedPerson);</span>
+<span class="fc" id="L94">    }</span>
+
+    //=========== Filtered Person List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code addressBook}
+     */
+    @Override
+    public ObservableList&lt;Person&gt; getFilteredPersonList() {
+<span class="fc" id="L104">        return filteredPersons;</span>
+    }
+
+    @Override
+    public void updateFilteredPersonList(Predicate&lt;Person&gt; predicate) {
+<span class="fc" id="L109">        requireNonNull(predicate);</span>
+<span class="fc" id="L110">        filteredPersons.setPredicate(predicate);</span>
+<span class="fc" id="L111">    }</span>
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L116">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (!(other instanceof ModelManager otherModelManager)) {</span>
+<span class="fc" id="L121">            return false;</span>
+        }
+
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        return addressBook.equals(otherModelManager.addressBook)</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">                &amp;&amp; userPrefs.equals(otherModelManager.userPrefs)</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">                &amp;&amp; filteredPersons.equals(otherModelManager.filteredPersons);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

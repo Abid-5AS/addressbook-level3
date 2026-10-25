@@ -1,0 +1,183 @@
+commit 7268979e4e70f4fe1d7c62083b1770f9c65f3a57
+Author:     Md. Abid Shahriar <abidshahriar@iut-dhaka.edu>
+AuthorDate: Thu Oct 22 09:31:35 2026 +0600
+Commit:     Md. Abid Shahriar <abidshahriar@iut-dhaka.edu>
+CommitDate: Thu Oct 22 09:31:35 2026 +0600
+
+    Add exact case-insensitive tag search using the existing find pipeline
+
+diff --git a/src/main/java/seedu/address/logic/commands/FindCommand.java b/src/main/java/seedu/address/logic/commands/FindCommand.java
+index 40c941ef..7497f824 100644
+--- a/src/main/java/seedu/address/logic/commands/FindCommand.java
++++ b/src/main/java/seedu/address/logic/commands/FindCommand.java
+@@ -2,14 +2,16 @@ package seedu.address.logic.commands;
+ 
+ import static java.util.Objects.requireNonNull;
+ 
++import java.util.function.Predicate;
++
+ import seedu.address.commons.util.ToStringBuilder;
+ import seedu.address.logic.Messages;
+ import seedu.address.model.Model;
+-import seedu.address.model.person.NameContainsKeywordsPredicate;
++import seedu.address.model.person.Person;
+ 
+ /**
+  * Finds and lists all persons in the address book whose name contains any of the argument keywords.
+- * Keyword matching is case insensitive.
++ * Keyword matching is case insensitive. A predicate selects either names or tags.
+  */
+ public class FindCommand extends Command {
+ 
+@@ -17,12 +19,12 @@ public class FindCommand extends Command {
+ 
+     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
++            + "Parameters: KEYWORD [MORE_KEYWORDS]... or t/TAG [MORE_TAGS]...\n"
+             + "Example: " + COMMAND_WORD + " alice bob charlie";
+ 
+-    private final NameContainsKeywordsPredicate predicate;
++    private final Predicate<Person> predicate;
+ 
+-    public FindCommand(NameContainsKeywordsPredicate predicate) {
++    public FindCommand(Predicate<Person> predicate) {
+         this.predicate = predicate;
+     }
+ 
+diff --git a/src/main/java/seedu/address/logic/parser/FindCommandParser.java b/src/main/java/seedu/address/logic/parser/FindCommandParser.java
+index 6fc23c01..36c78bb0 100644
+--- a/src/main/java/seedu/address/logic/parser/FindCommandParser.java
++++ b/src/main/java/seedu/address/logic/parser/FindCommandParser.java
+@@ -7,6 +7,7 @@ import java.util.List;
+ import seedu.address.logic.commands.FindCommand;
+ import seedu.address.logic.parser.exceptions.ParseException;
+ import seedu.address.model.person.NameContainsKeywordsPredicate;
++import seedu.address.model.person.TagContainsKeywordsPredicate;
+ 
+ /**
+  * Parses input arguments and creates a new FindCommand object
+@@ -25,6 +26,14 @@ public class FindCommandParser implements Parser<FindCommand> {
+                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+         }
+ 
++        if (trimmedArgs.startsWith("t/")) {
++            String tagArguments = trimmedArgs.substring(2).trim();
++            if (tagArguments.isEmpty()) {
++                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
++            }
++            return new FindCommand(new TagContainsKeywordsPredicate(List.of(tagArguments.split("\\s+"))));
++        }
++
+         String[] nameKeywords = trimmedArgs.split("\\s+");
+ 
+         return new FindCommand(new NameContainsKeywordsPredicate(List.of(nameKeywords)));
+diff --git a/src/main/java/seedu/address/model/person/TagContainsKeywordsPredicate.java b/src/main/java/seedu/address/model/person/TagContainsKeywordsPredicate.java
+new file mode 100644
+index 00000000..5d078568
+--- /dev/null
++++ b/src/main/java/seedu/address/model/person/TagContainsKeywordsPredicate.java
+@@ -0,0 +1,37 @@
++package seedu.address.model.person;
++
++import java.util.List;
++import java.util.function.Predicate;
++
++import seedu.address.commons.util.ToStringBuilder;
++
++/** Selects contacts having any exact, case-insensitive tag supplied by the user. */
++public class TagContainsKeywordsPredicate implements Predicate<Person> {
++    private final List<String> keywords;
++
++    public TagContainsKeywordsPredicate(List<String> keywords) {
++        this.keywords = List.copyOf(keywords);
++    }
++
++    @Override
++    public boolean test(Person person) {
++        return person.getTags().stream().anyMatch(tag -> keywords.stream()
++                .anyMatch(keyword -> tag.tagName.equalsIgnoreCase(keyword)));
++    }
++
++    @Override
++    public boolean equals(Object other) {
++        return other == this || other instanceof TagContainsKeywordsPredicate predicate
++                && keywords.equals(predicate.keywords);
++    }
++
++    @Override
++    public int hashCode() {
++        return keywords.hashCode();
++    }
++
++    @Override
++    public String toString() {
++        return new ToStringBuilder(this).add("keywords", keywords).toString();
++    }
++}
+diff --git a/src/test/java/seedu/address/commons/util/JsonUtilTest.java b/src/test/java/seedu/address/commons/util/JsonUtilTest.java
+index 187eb37f..ffb8b1f1 100644
+--- a/src/test/java/seedu/address/commons/util/JsonUtilTest.java
++++ b/src/test/java/seedu/address/commons/util/JsonUtilTest.java
+@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
+ import org.junit.jupiter.api.io.TempDir;
+ 
+ import seedu.address.commons.exceptions.DataLoadingException;
+-
+ import seedu.address.testutil.SerializableTestClass;
+ import seedu.address.testutil.TestUtil;
+ 
+diff --git a/src/test/java/seedu/address/logic/commands/TagSearchIntegrationTest.java b/src/test/java/seedu/address/logic/commands/TagSearchIntegrationTest.java
+new file mode 100644
+index 00000000..a7359c7c
+--- /dev/null
++++ b/src/test/java/seedu/address/logic/commands/TagSearchIntegrationTest.java
+@@ -0,0 +1,48 @@
++package seedu.address.logic.commands;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertThrows;
++
++import java.util.List;
++
++import org.junit.jupiter.api.Test;
++
++import seedu.address.logic.parser.AddressBookParser;
++import seedu.address.logic.parser.exceptions.ParseException;
++import seedu.address.model.AddressBook;
++import seedu.address.model.Model;
++import seedu.address.model.ModelManager;
++import seedu.address.model.UserPrefs;
++import seedu.address.model.person.Person;
++import seedu.address.testutil.PersonBuilder;
++
++/** Exercises the real command parser, predicates, filtered model and returned count together. */
++public class TagSearchIntegrationTest {
++    @Test
++    public void findTags_matchesWholeTagsIgnoringCaseAndListRestoresAll() throws Exception {
++        Person alice = new PersonBuilder().withName("Alice").withTags("friends").build();
++        Person bob = new PersonBuilder().withName("Bob").withTags("colleagues").build();
++        Person carl = new PersonBuilder().withName("Carl").withTags("friendship").build();
++        AddressBook book = new AddressBook();
++        book.addPerson(alice);
++        book.addPerson(bob);
++        book.addPerson(carl);
++        Model model = new ModelManager(book, new UserPrefs());
++        AddressBookParser parser = new AddressBookParser();
++        CommandResult result = parser.parseCommand("find t/FRIENDS colleagues").execute(model);
++        assertEquals(List.of(alice, bob), model.getFilteredPersonList());
++        assertEquals("2 person(s) listed!", result.getFeedbackToUser());
++        parser.parseCommand("find t/friend").execute(model);
++        assertEquals(List.of(), model.getFilteredPersonList());
++        parser.parseCommand("list").execute(model);
++        assertEquals(List.of(alice, bob, carl), model.getFilteredPersonList());
++        parser.parseCommand("find Alice").execute(model);
++        assertEquals(List.of(alice), model.getFilteredPersonList());
++        assertEquals(3, model.getAddressBook().getPersonList().size());
++    }
++
++    @Test
++    public void findTags_emptyQuery_isRejected() {
++        assertThrows(ParseException.class, () -> new AddressBookParser().parseCommand("find t/   "));
++    }
++}

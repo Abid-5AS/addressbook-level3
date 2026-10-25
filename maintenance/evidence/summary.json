@@ -1,0 +1,40 @@
+{
+  "tests": {
+    "tests": 245,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 3990,
+      "missed": 1251
+    },
+    "BRANCH": {
+      "covered": 278,
+      "missed": 49
+    },
+    "LINE": {
+      "covered": 921,
+      "missed": 270
+    },
+    "COMPLEXITY": {
+      "covered": 412,
+      "missed": 117
+    },
+    "METHOD": {
+      "covered": 278,
+      "missed": 84
+    },
+    "CLASS": {
+      "covered": 60,
+      "missed": 11
+    }
+  },
+  "upstream": "56d1ffbb9cc8df72b97c112fcfdd0cac635652db",
+  "main_java_files": 74,
+  "main_java_lines": 4780,
+  "pmd_findings": 29,
+  "maintained_source_commit": "3c62f6b2345abe8377d55ca053de3920d03f4b22",
+  "verification_log": "intellij/10-refactor-fresh-verification.txt"
+}

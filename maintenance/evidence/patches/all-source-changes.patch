@@ -1,0 +1,389 @@
+diff --git a/build.gradle b/build.gradle
+index 81469bdb..a14a5cac 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -11,8 +11,9 @@ application {
+ }
+ 
+ java {
+-    sourceCompatibility = JavaVersion.VERSION_25
+-    targetCompatibility = JavaVersion.VERSION_25
++    toolchain {
++        languageVersion = JavaLanguageVersion.of(21)
++    }
+ }
+ 
+ repositories {
+@@ -49,18 +50,16 @@ dependencies {
+     String jUnitVersion = '5.14.4'
+     String javaFxVersion = '17.0.7'
+ 
+-    implementation "org.openjfx:javafx-base:${javaFxVersion}:win"
+-    implementation "org.openjfx:javafx-base:${javaFxVersion}:mac"
+-    implementation "org.openjfx:javafx-base:${javaFxVersion}:linux"
+-    implementation "org.openjfx:javafx-controls:${javaFxVersion}:win"
+-    implementation "org.openjfx:javafx-controls:${javaFxVersion}:mac"
+-    implementation "org.openjfx:javafx-controls:${javaFxVersion}:linux"
+-    implementation "org.openjfx:javafx-fxml:${javaFxVersion}:win"
+-    implementation "org.openjfx:javafx-fxml:${javaFxVersion}:mac"
+-    implementation "org.openjfx:javafx-fxml:${javaFxVersion}:linux"
+-    implementation "org.openjfx:javafx-graphics:${javaFxVersion}:win"
+-    implementation "org.openjfx:javafx-graphics:${javaFxVersion}:mac"
+-    implementation "org.openjfx:javafx-graphics:${javaFxVersion}:linux"
++    // Select native libraries for the machine running this lab build.
++    String os = System.getProperty('os.name').toLowerCase(Locale.ROOT)
++    String arch = System.getProperty('os.arch')
++    String platform = os.contains('mac') ? 'mac' : (os.contains('win') ? 'win' : 'linux')
++    if (arch in ['aarch64', 'arm64'] && platform != 'win') {
++        platform += '-aarch64'
++    }
++    ['base', 'controls', 'fxml', 'graphics'].each { module ->
++        implementation "org.openjfx:javafx-${module}:${javaFxVersion}:${platform}"
++    }
+ 
+     implementation 'com.fasterxml.jackson.core:jackson-databind:2.7.0'
+     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.4'
+diff --git a/src/main/java/seedu/address/commons/util/FileUtil.java b/src/main/java/seedu/address/commons/util/FileUtil.java
+index e7b7ce67..357efdb6 100644
+--- a/src/main/java/seedu/address/commons/util/FileUtil.java
++++ b/src/main/java/seedu/address/commons/util/FileUtil.java
+@@ -3,6 +3,7 @@ package seedu.address.commons.util;
+ import java.io.IOException;
+ import java.nio.file.Files;
+ import java.nio.file.Path;
++import java.nio.file.StandardCopyOption;
+ 
+ /**
+  * Writes and reads files
+@@ -51,4 +52,31 @@ public class FileUtil {
+         Files.write(file, content.getBytes(CHARSET));
+     }
+ 
++    /**
++     * Replaces a file only after its complete new contents have been written to a sibling temporary file.
++     * Fails without a non-atomic fallback if the filesystem does not support atomic replacement.
++     */
++    public static void writeAtomically(Path file, String content) throws IOException {
++        writeAtomically(file, content, FileUtil::writeToFile);
++    }
++
++    /** Package-private writer seam allows deterministic interrupted-write regression tests. */
++    static void writeAtomically(Path file, String content, ContentWriter writer) throws IOException {
++        Path target = file.toAbsolutePath();
++        createParentDirsOfFile(target);
++        Path temporary = Files.createTempFile(target.getParent(), ".addressbook-", ".tmp");
++        try {
++            writer.write(temporary, content);
++            Files.move(temporary, target, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
++        } finally {
++            Files.deleteIfExists(temporary);
++        }
++    }
++
++    /** Writes the staged content; production uses the same UTF-8 writer as ordinary files. */
++    @FunctionalInterface
++    interface ContentWriter {
++        void write(Path file, String content) throws IOException;
++    }
++
+ }
+diff --git a/src/main/java/seedu/address/commons/util/JsonUtil.java b/src/main/java/seedu/address/commons/util/JsonUtil.java
+index 0b4103c1..5f4de5c9 100644
+--- a/src/main/java/seedu/address/commons/util/JsonUtil.java
++++ b/src/main/java/seedu/address/commons/util/JsonUtil.java
+@@ -32,7 +32,7 @@ public class JsonUtil {
+             .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+ 
+     static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
+-        FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
++        FileUtil.writeAtomically(jsonFile, toJsonString(objectToSerialize));
+     }
+ 
+     static <T> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
+@@ -60,7 +60,7 @@ public class JsonUtil {
+         T jsonFile;
+ 
+         try {
+-            jsonFile = deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize);
++            jsonFile = requireDocumentValue(deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize));
+         } catch (IOException e) {
+             logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
+             throw new DataLoadingException(e);
+@@ -69,6 +69,14 @@ public class JsonUtil {
+         return Optional.of(jsonFile);
+     }
+ 
++    /** Keeps document validation separate from file access and error normalization. */
++    private static <T> T requireDocumentValue(T value) throws IOException {
++        if (value == null) {
++            throw new IOException("Expected a JSON object, but the document contains null.");
++        }
++        return value;
++    }
++
+     /**
+      * Saves the Json object to the specified file.
+      * Overwrites existing file if it exists, creates a new file if it doesn't.
+diff --git a/src/main/java/seedu/address/logic/commands/FindCommand.java b/src/main/java/seedu/address/logic/commands/FindCommand.java
+index 40c941ef..f15a152e 100644
+--- a/src/main/java/seedu/address/logic/commands/FindCommand.java
++++ b/src/main/java/seedu/address/logic/commands/FindCommand.java
+@@ -2,27 +2,29 @@ package seedu.address.logic.commands;
+ 
+ import static java.util.Objects.requireNonNull;
+ 
++import java.util.function.Predicate;
++
+ import seedu.address.commons.util.ToStringBuilder;
+ import seedu.address.logic.Messages;
+ import seedu.address.model.Model;
+-import seedu.address.model.person.NameContainsKeywordsPredicate;
++import seedu.address.model.person.Person;
+ 
+ /**
+- * Finds and lists all persons in the address book whose name contains any of the argument keywords.
+- * Keyword matching is case insensitive.
++ * Finds and lists persons matching any supplied name keyword or tag.
++ * Keyword matching is case insensitive. A predicate selects either names or tags.
+  */
+ public class FindCommand extends Command {
+ 
+     public static final String COMMAND_WORD = "find";
+ 
+-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+-            + "Example: " + COMMAND_WORD + " alice bob charlie";
++    public static final String MESSAGE_USAGE = COMMAND_WORD
++            + ": Finds contacts by name words, or by whole tags with t/ (case-insensitive).\n"
++            + "Parameters: KEYWORD [MORE_KEYWORDS]... or t/TAG [MORE_TAGS]...\n"
++            + "Examples: " + COMMAND_WORD + " alice bob; " + COMMAND_WORD + " t/friends colleagues";
+ 
+-    private final NameContainsKeywordsPredicate predicate;
++    private final Predicate<Person> predicate;
+ 
+-    public FindCommand(NameContainsKeywordsPredicate predicate) {
++    public FindCommand(Predicate<Person> predicate) {
+         this.predicate = predicate;
+     }
+ 
+diff --git a/src/main/java/seedu/address/logic/parser/FindCommandParser.java b/src/main/java/seedu/address/logic/parser/FindCommandParser.java
+index 6fc23c01..450e00f4 100644
+--- a/src/main/java/seedu/address/logic/parser/FindCommandParser.java
++++ b/src/main/java/seedu/address/logic/parser/FindCommandParser.java
+@@ -7,6 +7,7 @@ import java.util.List;
+ import seedu.address.logic.commands.FindCommand;
+ import seedu.address.logic.parser.exceptions.ParseException;
+ import seedu.address.model.person.NameContainsKeywordsPredicate;
++import seedu.address.model.person.TagContainsKeywordsPredicate;
+ 
+ /**
+  * Parses input arguments and creates a new FindCommand object
+@@ -25,9 +26,21 @@ public class FindCommandParser implements Parser<FindCommand> {
+                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+         }
+ 
++        if (trimmedArgs.startsWith("t/")) {
++            return parseTagQuery(trimmedArgs);
++        }
++
+         String[] nameKeywords = trimmedArgs.split("\\s+");
+ 
+         return new FindCommand(new NameContainsKeywordsPredicate(List.of(nameKeywords)));
+     }
+ 
++    private static FindCommand parseTagQuery(String trimmedArgs) throws ParseException {
++        String tagArguments = trimmedArgs.substring(2).trim();
++        if (tagArguments.isEmpty()) {
++            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
++        }
++        return new FindCommand(new TagContainsKeywordsPredicate(List.of(tagArguments.split("\\s+"))));
++    }
++
+ }
+diff --git a/src/main/java/seedu/address/model/person/TagContainsKeywordsPredicate.java b/src/main/java/seedu/address/model/person/TagContainsKeywordsPredicate.java
+new file mode 100644
+index 00000000..5d078568
+--- /dev/null
++++ b/src/main/java/seedu/address/model/person/TagContainsKeywordsPredicate.java
+@@ -0,0 +1,37 @@
++package seedu.address.model.person;
++
++import java.util.List;
++import java.util.function.Predicate;
++
++import seedu.address.commons.util.ToStringBuilder;
++
++/** Selects contacts having any exact, case-insensitive tag supplied by the user. */
++public class TagContainsKeywordsPredicate implements Predicate<Person> {
++    private final List<String> keywords;
++
++    public TagContainsKeywordsPredicate(List<String> keywords) {
++        this.keywords = List.copyOf(keywords);
++    }
++
++    @Override
++    public boolean test(Person person) {
++        return person.getTags().stream().anyMatch(tag -> keywords.stream()
++                .anyMatch(keyword -> tag.tagName.equalsIgnoreCase(keyword)));
++    }
++
++    @Override
++    public boolean equals(Object other) {
++        return other == this || other instanceof TagContainsKeywordsPredicate predicate
++                && keywords.equals(predicate.keywords);
++    }
++
++    @Override
++    public int hashCode() {
++        return keywords.hashCode();
++    }
++
++    @Override
++    public String toString() {
++        return new ToStringBuilder(this).add("keywords", keywords).toString();
++    }
++}
+diff --git a/src/test/java/seedu/address/commons/util/AtomicFileWriteTest.java b/src/test/java/seedu/address/commons/util/AtomicFileWriteTest.java
+new file mode 100644
+index 00000000..0e3234ad
+--- /dev/null
++++ b/src/test/java/seedu/address/commons/util/AtomicFileWriteTest.java
+@@ -0,0 +1,48 @@
++package seedu.address.commons.util;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertThrows;
++
++import java.io.IOException;
++import java.nio.file.Files;
++import java.nio.file.Path;
++
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.io.TempDir;
++
++public class AtomicFileWriteTest {
++    @TempDir
++    private Path directory;
++
++    @Test
++    public void writeAtomically_replacesExistingContentAndCleansStagingFile() throws IOException {
++        Path target = directory.resolve("contacts.json");
++        Files.writeString(target, "old contents");
++        FileUtil.writeAtomically(target, "new contents");
++        assertEquals("new contents", Files.readString(target));
++        try (var files = Files.list(directory)) {
++            assertEquals(1, files.count());
++        }
++    }
++
++    @Test
++    public void writeAtomically_interruptedStaging_preservesOriginalAndCleansTemporary() throws IOException {
++        Path target = directory.resolve("contacts.json");
++        Files.writeString(target, "original intact");
++        assertThrows(IOException.class, () -> FileUtil.writeAtomically(target, "replacement", (temporary, content) -> {
++            Files.writeString(temporary, "partial");
++            throw new IOException("Simulated disk write interruption");
++        }));
++        assertEquals("original intact", Files.readString(target));
++        try (var files = Files.list(directory)) {
++            assertEquals(1, files.count());
++        }
++    }
++
++    @Test
++    public void writeAtomically_createsNestedParentAndPreservesUtf8() throws IOException {
++        Path target = directory.resolve("nested/contacts.json");
++        FileUtil.writeAtomically(target, "ঢাকা");
++        assertEquals("ঢাকা", Files.readString(target));
++    }
++}
+diff --git a/src/test/java/seedu/address/commons/util/JsonUtilTest.java b/src/test/java/seedu/address/commons/util/JsonUtilTest.java
+index d4907539..ffb8b1f1 100644
+--- a/src/test/java/seedu/address/commons/util/JsonUtilTest.java
++++ b/src/test/java/seedu/address/commons/util/JsonUtilTest.java
+@@ -1,12 +1,16 @@
+ package seedu.address.commons.util;
+ 
+ import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertThrows;
+ 
+ import java.io.IOException;
++import java.nio.file.Files;
+ import java.nio.file.Path;
+ 
+ import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.io.TempDir;
+ 
++import seedu.address.commons.exceptions.DataLoadingException;
+ import seedu.address.testutil.SerializableTestClass;
+ import seedu.address.testutil.TestUtil;
+ 
+@@ -39,6 +43,13 @@ public class JsonUtilTest {
+         assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
+     }
+ 
++    @Test
++    public void readJsonFile_nullDocument_throwsDataLoadingException(@TempDir Path directory) throws IOException {
++        Path file = directory.resolve("null.json");
++        Files.writeString(file, "null");
++        assertThrows(DataLoadingException.class, () -> JsonUtil.readJsonFile(file, SerializableTestClass.class));
++    }
++
+     //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
+ 
+     //TODO: @Test jsonUtil_writeThenReadObjectToJson_correctObject()
+diff --git a/src/test/java/seedu/address/logic/commands/TagSearchIntegrationTest.java b/src/test/java/seedu/address/logic/commands/TagSearchIntegrationTest.java
+new file mode 100644
+index 00000000..a7359c7c
+--- /dev/null
++++ b/src/test/java/seedu/address/logic/commands/TagSearchIntegrationTest.java
+@@ -0,0 +1,48 @@
++package seedu.address.logic.commands;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertThrows;
++
++import java.util.List;
++
++import org.junit.jupiter.api.Test;
++
++import seedu.address.logic.parser.AddressBookParser;
++import seedu.address.logic.parser.exceptions.ParseException;
++import seedu.address.model.AddressBook;
++import seedu.address.model.Model;
++import seedu.address.model.ModelManager;
++import seedu.address.model.UserPrefs;
++import seedu.address.model.person.Person;
++import seedu.address.testutil.PersonBuilder;
++
++/** Exercises the real command parser, predicates, filtered model and returned count together. */
++public class TagSearchIntegrationTest {
++    @Test
++    public void findTags_matchesWholeTagsIgnoringCaseAndListRestoresAll() throws Exception {
++        Person alice = new PersonBuilder().withName("Alice").withTags("friends").build();
++        Person bob = new PersonBuilder().withName("Bob").withTags("colleagues").build();
++        Person carl = new PersonBuilder().withName("Carl").withTags("friendship").build();
++        AddressBook book = new AddressBook();
++        book.addPerson(alice);
++        book.addPerson(bob);
++        book.addPerson(carl);
++        Model model = new ModelManager(book, new UserPrefs());
++        AddressBookParser parser = new AddressBookParser();
++        CommandResult result = parser.parseCommand("find t/FRIENDS colleagues").execute(model);
++        assertEquals(List.of(alice, bob), model.getFilteredPersonList());
++        assertEquals("2 person(s) listed!", result.getFeedbackToUser());
++        parser.parseCommand("find t/friend").execute(model);
++        assertEquals(List.of(), model.getFilteredPersonList());
++        parser.parseCommand("list").execute(model);
++        assertEquals(List.of(alice, bob, carl), model.getFilteredPersonList());
++        parser.parseCommand("find Alice").execute(model);
++        assertEquals(List.of(alice), model.getFilteredPersonList());
++        assertEquals(3, model.getAddressBook().getPersonList().size());
++    }
++
++    @Test
++    public void findTags_emptyQuery_isRejected() {
++        assertThrows(ParseException.class, () -> new AddressBookParser().parseCommand("find t/   "));
++    }
++}

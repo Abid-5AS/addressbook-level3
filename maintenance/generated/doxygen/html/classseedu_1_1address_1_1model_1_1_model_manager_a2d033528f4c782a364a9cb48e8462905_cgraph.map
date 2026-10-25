@@ -1,0 +1,7 @@
+<map id="seedu.address.model.ModelManager.deletePerson" name="seedu.address.model.ModelManager.deletePerson">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,190,46"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1model_1_1_address_book.html#a7f038f017b67b50058a65cb7ff9b1db3" title=" " alt="" coords="238,5,435,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,23,225,25,220,26,190,28"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1model_1_1person_1_1_unique_person_list.html#ad878256283fc33b8b28d399a85e7e531" title=" " alt="" coords="483,5,675,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="435,23,470,26,465,26,435,28"/>
+</map>

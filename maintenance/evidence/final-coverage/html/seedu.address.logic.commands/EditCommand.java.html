@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EditCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic.commands</a> &gt; <span class="el_source">EditCommand.java</span></div><h1>EditCommand.java</h1><pre class="source lang-java linenums">package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Edits the details of an existing person in the address book.
+ */
+public class EditCommand extends Command {
+
+    public static final String COMMAND_WORD = &quot;edit&quot;;
+
+<span class="fc" id="L38">    public static final String MESSAGE_USAGE = COMMAND_WORD + &quot;: Edits the details of the person identified &quot;</span>
+            + &quot;by the index number used in the displayed person list. &quot;
+            + &quot;Existing values will be overwritten by the input values.\n&quot;
+            + &quot;Parameters: INDEX (must be a positive integer) &quot;
+            + &quot;[&quot; + PREFIX_NAME + &quot;NAME] &quot;
+            + &quot;[&quot; + PREFIX_PHONE + &quot;PHONE] &quot;
+            + &quot;[&quot; + PREFIX_EMAIL + &quot;EMAIL] &quot;
+            + &quot;[&quot; + PREFIX_ADDRESS + &quot;ADDRESS] &quot;
+            + &quot;[&quot; + PREFIX_TAG + &quot;TAG]...\n&quot;
+            + &quot;Example: &quot; + COMMAND_WORD + &quot; 1 &quot;
+            + PREFIX_PHONE + &quot;91234567 &quot;
+            + PREFIX_EMAIL + &quot;johndoe@example.com&quot;;
+
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = &quot;Edited person: %1$s&quot;;
+    public static final String MESSAGE_NOT_EDITED = &quot;At least one field to edit must be provided.&quot;;
+    public static final String MESSAGE_DUPLICATE_PERSON = &quot;This person already exists in the address book.&quot;;
+
+    private final Index index;
+    private final EditPersonDescriptor editPersonDescriptor;
+
+    /**
+     * @param index of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     */
+<span class="fc" id="L62">    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {</span>
+<span class="fc" id="L63">        requireNonNull(index);</span>
+<span class="fc" id="L64">        requireNonNull(editPersonDescriptor);</span>
+
+<span class="fc" id="L66">        this.index = index;</span>
+<span class="fc" id="L67">        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);</span>
+<span class="fc" id="L68">    }</span>
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+<span class="fc" id="L72">        requireNonNull(model);</span>
+<span class="fc" id="L73">        List&lt;Person&gt; lastShownList = model.getFilteredPersonList();</span>
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (index.getZeroBased() &gt;= lastShownList.size()) {</span>
+<span class="fc" id="L76">            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);</span>
+        }
+
+<span class="fc" id="L79">        Person personToEdit = lastShownList.get(index.getZeroBased());</span>
+<span class="fc" id="L80">        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);</span>
+
+<span class="fc bfc" id="L82" title="All 4 branches covered.">        if (!personToEdit.isSamePerson(editedPerson) &amp;&amp; model.hasPerson(editedPerson)) {</span>
+<span class="fc" id="L83">            throw new CommandException(MESSAGE_DUPLICATE_PERSON);</span>
+        }
+
+<span class="fc" id="L86">        model.setPerson(personToEdit, editedPerson);</span>
+<span class="fc" id="L87">        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);</span>
+<span class="fc" id="L88">        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));</span>
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        assert personToEdit != null;</span>
+
+<span class="fc" id="L98">        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());</span>
+<span class="fc" id="L99">        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());</span>
+<span class="fc" id="L100">        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());</span>
+<span class="fc" id="L101">        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());</span>
+<span class="fc" id="L102">        Set&lt;Tag&gt; updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());</span>
+
+<span class="fc" id="L104">        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (other == this) {</span>
+<span class="fc" id="L110">            return true;</span>
+        }
+
+        // instanceof handles nulls
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if (!(other instanceof EditCommand otherEditCommand)) {</span>
+<span class="fc" id="L115">            return false;</span>
+        }
+
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        return index.equals(otherEditCommand.index)</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">                &amp;&amp; editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L124">        return new ToStringBuilder(this)</span>
+<span class="fc" id="L125">                .add(&quot;index&quot;, index)</span>
+<span class="fc" id="L126">                .add(&quot;editPersonDescriptor&quot;, editPersonDescriptor)</span>
+<span class="fc" id="L127">                .toString();</span>
+    }
+
+    /**
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
+     */
+    public static class EditPersonDescriptor {
+        private Name name;
+        private Phone phone;
+        private Email email;
+        private Address address;
+        private Set&lt;Tag&gt; tags;
+
+<span class="fc" id="L141">        public EditPersonDescriptor() {}</span>
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+<span class="fc" id="L147">        public EditPersonDescriptor(EditPersonDescriptor toCopy) {</span>
+<span class="fc" id="L148">            setName(toCopy.name);</span>
+<span class="fc" id="L149">            setPhone(toCopy.phone);</span>
+<span class="fc" id="L150">            setEmail(toCopy.email);</span>
+<span class="fc" id="L151">            setAddress(toCopy.address);</span>
+<span class="fc" id="L152">            setTags(toCopy.tags);</span>
+<span class="fc" id="L153">        }</span>
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+<span class="fc" id="L159">            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);</span>
+        }
+
+        public void setName(Name name) {
+<span class="fc" id="L163">            this.name = name;</span>
+<span class="fc" id="L164">        }</span>
+
+        public Optional&lt;Name&gt; getName() {
+<span class="fc" id="L167">            return Optional.ofNullable(name);</span>
+        }
+
+        public void setPhone(Phone phone) {
+<span class="fc" id="L171">            this.phone = phone;</span>
+<span class="fc" id="L172">        }</span>
+
+        public Optional&lt;Phone&gt; getPhone() {
+<span class="fc" id="L175">            return Optional.ofNullable(phone);</span>
+        }
+
+        public void setEmail(Email email) {
+<span class="fc" id="L179">            this.email = email;</span>
+<span class="fc" id="L180">        }</span>
+
+        public Optional&lt;Email&gt; getEmail() {
+<span class="fc" id="L183">            return Optional.ofNullable(email);</span>
+        }
+
+        public void setAddress(Address address) {
+<span class="fc" id="L187">            this.address = address;</span>
+<span class="fc" id="L188">        }</span>
+
+        public Optional&lt;Address&gt; getAddress() {
+<span class="fc" id="L191">            return Optional.ofNullable(address);</span>
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set&lt;Tag&gt; tags) {
+<span class="fc bfc" id="L199" title="All 2 branches covered.">            this.tags = (tags != null) ? new HashSet&lt;&gt;(tags) : null;</span>
+<span class="fc" id="L200">        }</span>
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional&lt;Set&lt;Tag&gt;&gt; getTags() {
+<span class="fc bfc" id="L208" title="All 2 branches covered.">            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();</span>
+        }
+
+        @Override
+        public boolean equals(Object other) {
+<span class="fc bfc" id="L213" title="All 2 branches covered.">            if (other == this) {</span>
+<span class="fc" id="L214">                return true;</span>
+            }
+
+            // instanceof handles nulls
+<span class="fc bfc" id="L218" title="All 2 branches covered.">            if (!(other instanceof EditPersonDescriptor otherEditPersonDescriptor)) {</span>
+<span class="fc" id="L219">                return false;</span>
+            }
+
+<span class="fc bfc" id="L222" title="All 2 branches covered.">            return Objects.equals(name, otherEditPersonDescriptor.name)</span>
+<span class="fc bfc" id="L223" title="All 2 branches covered.">                    &amp;&amp; Objects.equals(phone, otherEditPersonDescriptor.phone)</span>
+<span class="fc bfc" id="L224" title="All 2 branches covered.">                    &amp;&amp; Objects.equals(email, otherEditPersonDescriptor.email)</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">                    &amp;&amp; Objects.equals(address, otherEditPersonDescriptor.address)</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">                    &amp;&amp; Objects.equals(tags, otherEditPersonDescriptor.tags);</span>
+        }
+
+        @Override
+        public String toString() {
+<span class="fc" id="L231">            return new ToStringBuilder(this)</span>
+<span class="fc" id="L232">                    .add(&quot;name&quot;, name)</span>
+<span class="fc" id="L233">                    .add(&quot;phone&quot;, phone)</span>
+<span class="fc" id="L234">                    .add(&quot;email&quot;, email)</span>
+<span class="fc" id="L235">                    .add(&quot;address&quot;, address)</span>
+<span class="fc" id="L236">                    .add(&quot;tags&quot;, tags)</span>
+<span class="fc" id="L237">                    .toString();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

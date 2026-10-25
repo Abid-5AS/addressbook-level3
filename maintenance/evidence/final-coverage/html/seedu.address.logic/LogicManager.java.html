@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LogicManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic</a> &gt; <span class="el_source">LogicManager.java</span></div><h1>LogicManager.java</h1><pre class="source lang-java linenums">package seedu.address.logic;
+
+import java.io.IOException;
+import java.nio.file.AccessDeniedException;
+import java.util.logging.Logger;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.storage.Storage;
+
+/**
+ * The main LogicManager of the app.
+ */
+public class LogicManager implements Logic {
+    public static final String FILE_OPS_ERROR_FORMAT = &quot;Could not save data due to the following error: %s&quot;;
+
+    public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
+            &quot;Could not save data to file %s due to insufficient permissions to write to the file or the folder.&quot;;
+
+<span class="fc" id="L28">    private final Logger logger = LogsCenter.getLogger(LogicManager.class);</span>
+
+    private final Model model;
+    private final Storage storage;
+    private final AddressBookParser addressBookParser;
+
+    /**
+     * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     */
+<span class="fc" id="L37">    public LogicManager(Model model, Storage storage) {</span>
+<span class="fc" id="L38">        this.model = model;</span>
+<span class="fc" id="L39">        this.storage = storage;</span>
+<span class="fc" id="L40">        addressBookParser = new AddressBookParser();</span>
+<span class="fc" id="L41">    }</span>
+
+    @Override
+    public CommandResult execute(String commandText) throws CommandException, ParseException {
+<span class="fc" id="L45">        logger.info(&quot;----------------[USER COMMAND][&quot; + commandText + &quot;]&quot;);</span>
+
+        CommandResult commandResult;
+<span class="fc" id="L48">        Command command = addressBookParser.parseCommand(commandText);</span>
+<span class="fc" id="L49">        commandResult = command.execute(model);</span>
+
+        try {
+<span class="fc" id="L52">            storage.saveAddressBook(model.getAddressBook());</span>
+<span class="fc" id="L53">        } catch (AccessDeniedException e) {</span>
+<span class="fc" id="L54">            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);</span>
+<span class="fc" id="L55">        } catch (IOException ioe) {</span>
+<span class="fc" id="L56">            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);</span>
+<span class="fc" id="L57">        }</span>
+
+<span class="fc" id="L59">        return commandResult;</span>
+    }
+
+    @Override
+    public ObservableList&lt;Person&gt; getFilteredPersonList() {
+<span class="fc" id="L64">        return model.getFilteredPersonList();</span>
+    }
+
+    @Override
+    public GuiSettings getGuiSettings() {
+<span class="nc" id="L69">        return model.getGuiSettings();</span>
+    }
+
+    @Override
+    public void setGuiSettings(GuiSettings guiSettings) {
+<span class="nc" id="L74">        model.setGuiSettings(guiSettings);</span>
+<span class="nc" id="L75">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

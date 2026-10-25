@@ -1,0 +1,9 @@
+<map id="src/main/java/seedu/address/model/UserPrefs.java" name="src/main/java/seedu/address/model/UserPrefs.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="145,5,346,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,164,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,46,135,89,133,84,207,47"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="188,102,304,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,45,248,88,244,85,244,48"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="327,94,527,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="288,44,375,87,370,87,286,49"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="seedu.address.storage.StorageManager" name="seedu.address.storage.StorageManager">
+<area shape="rect" id="Node000001" title=" " alt="" coords="385,55,587,96"/>
+<area shape="rect" id="Node000002" href="$interfaceseedu_1_1address_1_1storage_1_1_storage.html" title=" " alt="" coords="5,5,208,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,26,361,45,400,54,394,55,360,50,223,32"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1storage_1_1_json_address_book_storage.html" title=" " alt="" coords="14,55,199,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,73,386,74,382,77,215,78"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1storage_1_1_json_user_prefs_storage.html" title=" " alt="" coords="14,120,199,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="214,125,360,101,394,97,399,96,361,106,215,130"/>
+</map>

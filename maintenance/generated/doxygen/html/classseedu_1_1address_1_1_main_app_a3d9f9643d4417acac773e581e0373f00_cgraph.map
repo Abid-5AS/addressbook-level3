@@ -1,0 +1,16 @@
+<map id="seedu.address.MainApp.initPrefs" name="seedu.address.MainApp.initPrefs">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,160,188,201"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1commons_1_1util_1_1_string_util.html#a8aca06fa04ebda34c6c89645bc6cbfcd" title=" " alt="" coords="267,5,459,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,158,165,107,198,80,234,57,254,50,250,53,237,61,201,84,168,111,118,161"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1storage_1_1_json_user_prefs_storage.html#a3a934c38a91f185e10f3b97948f24257" title=" " alt="" coords="236,71,490,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,157,235,122,265,115,260,117,237,127,146,162"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1storage_1_1_json_user_prefs_storage.html#a355e2622bf102691415b19dce16915b9" title=" " alt="" coords="256,160,470,201"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="188,178,243,179,238,181,189,183"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1storage_1_1_json_user_prefs_storage.html#a67054bdcab9e8d86d20ca031fa8c28d9" title=" " alt="" coords="255,225,471,266"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="182,199,265,220,260,222,182,204"/>
+<area shape="rect" id="Node000007" href="$classseedu_1_1address_1_1model_1_1_user_prefs.html#a078bdf2aae469beb1026f61170393b91" title=" " alt="" coords="274,291,452,331"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="122,199,174,238,237,275,262,288,257,287,234,280,171,242,121,204"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="313,158,311,150,319,141,336,135,363,133,391,136,410,144,405,145,390,141,363,139,337,141,322,145,316,151,318,160"/>
+<area shape="rect" id="Node000006" href="$classseedu_1_1address_1_1commons_1_1util_1_1_json_util.html#a38edce411824bde86e74e4b335901d81" title=" " alt="" coords="538,225,730,266"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="471,243,525,245,520,246,472,248"/>
+</map>

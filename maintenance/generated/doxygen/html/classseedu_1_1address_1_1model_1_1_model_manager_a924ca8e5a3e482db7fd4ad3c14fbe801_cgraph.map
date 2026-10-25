@@ -1,0 +1,13 @@
+<map id="seedu.address.model.ModelManager.addPerson" name="seedu.address.model.ModelManager.addPerson">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,75,190,115"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1model_1_1_address_book.html#ae1940555773f114d725b7b27b78a7b13" title=" " alt="" coords="248,41,446,82"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,80,235,76,230,78,191,85"/>
+<area shape="rect" id="Node000006" href="$classseedu_1_1address_1_1model_1_1_model_manager.html#ae6d0f3d5b359d57247db1291b17a8e06" title=" " alt="" coords="238,107,456,147"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="190,104,225,111,219,111,190,110"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1model_1_1person_1_1_unique_person_list.html#a82cd7a87cddea388652f5ba2ca4825ca" title=" " alt="" coords="504,41,696,82"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="446,59,491,61,486,62,446,64"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1model_1_1person_1_1_unique_person_list.html#a829f90d0906f4f61a1141038ab73d6e1" title=" " alt="" coords="786,5,978,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="696,47,773,40,768,40,697,52"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1model_1_1person_1_1exceptions_1_1_duplicate_person_exception.html#a6b8b46eedba0b98018506273e8632043" title=" " alt="" coords="744,70,1020,126"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="697,71,732,78,726,78,697,77"/>
+</map>

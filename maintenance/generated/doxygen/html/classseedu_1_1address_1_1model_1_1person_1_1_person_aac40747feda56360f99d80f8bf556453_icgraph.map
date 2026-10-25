@@ -1,0 +1,11 @@
+<map id="seedu.address.model.person.Person.isSamePerson" name="seedu.address.model.person.Person.isSamePerson">
+<area shape="rect" id="Node000001" title=" " alt="" coords="740,39,933,79"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_edit_command.html#a7a0a62d6dec4fb8ea37aa247e9a82a59" title=" " alt="" coords="483,5,692,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="722,44,693,42,693,37,728,44"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1model_1_1person_1_1_unique_person_list.html#a584268abe967f33b5d5b69a975bfbeba" title=" " alt="" coords="492,71,684,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="728,73,685,81,684,76,722,74"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1model_1_1_address_book.html#afc61896297cea8d2866224334813b8b0" title=" " alt="" coords="238,71,435,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="473,91,435,94,435,88,478,91"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1model_1_1_model_manager.html#abf3b73b9f212c2d1281f1691ab879e0e" title=" " alt="" coords="5,71,190,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="219,91,190,94,190,88,225,91"/>
+</map>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.model.UserPrefsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-22T09:00:21.709Z" hostname="MacBook-Air.local" time="0.0">
+  <properties/>
+  <testcase name="setGuiSettings_nullGuiSettings_throwsNullPointerException()" classname="seedu.address.model.UserPrefsTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JsonUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.commons.util</a> &gt; <span class="el_source">JsonUtil.java</span></div><h1>JsonUtil.java</h1><pre class="source lang-java linenums">package seedu.address.commons.util;
+
+import static java.util.Objects.requireNonNull;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.logging.Logger;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
+
+/**
+ * Converts a Java object instance to JSON and vice versa
+ */
+<span class="nc" id="L24">public class JsonUtil {</span>
+
+<span class="fc" id="L26">    private static final Logger logger = LogsCenter.getLogger(JsonUtil.class);</span>
+
+<span class="fc" id="L28">    private static ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()</span>
+<span class="fc" id="L29">            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</span>
+<span class="fc" id="L30">            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)</span>
+<span class="fc" id="L31">            .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)</span>
+<span class="fc" id="L32">            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);</span>
+
+    static &lt;T&gt; void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
+<span class="fc" id="L35">        FileUtil.writeAtomically(jsonFile, toJsonString(objectToSerialize));</span>
+<span class="fc" id="L36">    }</span>
+
+    static &lt;T&gt; T deserializeObjectFromJsonFile(Path jsonFile, Class&lt;T&gt; classOfObjectToDeserialize)
+            throws IOException {
+<span class="fc" id="L40">        return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);</span>
+    }
+
+    /**
+     * Returns the JSON object from the given file or {@code Optional.empty()} object if the file is not found.
+     * If any values are missing from the file, default values will be used, as long as the file is a valid JSON file.
+     *
+     * @param filePath cannot be null.
+     * @param classOfObjectToDeserialize JSON file has to correspond to the structure in the class given here.
+     * @throws DataLoadingException if loading of the JSON file failed.
+     */
+    public static &lt;T&gt; Optional&lt;T&gt; readJsonFile(
+            Path filePath, Class&lt;T&gt; classOfObjectToDeserialize) throws DataLoadingException {
+<span class="fc" id="L53">        requireNonNull(filePath);</span>
+
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (!Files.exists(filePath)) {</span>
+<span class="fc" id="L56">            return Optional.empty();</span>
+        }
+<span class="fc" id="L58">        logger.info(&quot;JSON file &quot; + filePath + &quot; found.&quot;);</span>
+
+        T jsonFile;
+
+        try {
+<span class="fc" id="L63">            jsonFile = requireDocumentValue(deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize));</span>
+<span class="fc" id="L64">        } catch (IOException e) {</span>
+<span class="fc" id="L65">            logger.warning(&quot;Error reading from jsonFile file &quot; + filePath + &quot;: &quot; + e);</span>
+<span class="fc" id="L66">            throw new DataLoadingException(e);</span>
+<span class="fc" id="L67">        }</span>
+
+<span class="fc" id="L69">        return Optional.of(jsonFile);</span>
+    }
+
+    /** Keeps document validation separate from file access and error normalization. */
+    private static &lt;T&gt; T requireDocumentValue(T value) throws IOException {
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (value == null) {</span>
+<span class="fc" id="L75">            throw new IOException(&quot;Expected a JSON object, but the document contains null.&quot;);</span>
+        }
+<span class="fc" id="L77">        return value;</span>
+    }
+
+    /**
+     * Saves the Json object to the specified file.
+     * Overwrites existing file if it exists, creates a new file if it doesn't.
+     * @param jsonFile cannot be null
+     * @param filePath cannot be null
+     * @throws IOException if there was an error during writing to the file
+     */
+    public static &lt;T&gt; void saveJsonFile(T jsonFile, Path filePath) throws IOException {
+<span class="fc" id="L88">        requireNonNull(filePath);</span>
+<span class="fc" id="L89">        requireNonNull(jsonFile);</span>
+
+<span class="fc" id="L91">        serializeObjectToJsonFile(filePath, jsonFile);</span>
+<span class="fc" id="L92">    }</span>
+
+
+    /**
+     * Converts a given string representation of JSON data to an instance of a class
+     * @param &lt;T&gt; The generic type to create an instance of
+     * @return The instance of T with the specified values in the JSON string
+     */
+    public static &lt;T&gt; T fromJsonString(String json, Class&lt;T&gt; instanceClass) throws IOException {
+<span class="fc" id="L101">        return objectMapper.readValue(json, instanceClass);</span>
+    }
+
+    /**
+     * Converts a given instance of a class into its JSON data string representation
+     * @param instance The T object to be converted into the JSON string
+     * @param &lt;T&gt; The generic type to create an instance of
+     * @return JSON data representation of the given class instance, in string
+     */
+    public static &lt;T&gt; String toJsonString(T instance) throws JsonProcessingException {
+<span class="fc" id="L111">        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

@@ -1,0 +1,53 @@
+25 October 2026, Asia/Dhaka
+Created and selected AddressBook Demo application run configuration.
+Main class: seedu.address.Main; module: AddressBook-Maintenance.main; Java 21 module SDK; working directory: maintenance/demo-state.
+Earlier direct MainApp launch failed with JavaFX runtime components missing. Main.java already documents the launcher workaround; no application source modification was necessary.
+Observed IntelliJ console after Run:
+6:51:56 PM: Executing ':seedu.address.Main.main()'…
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :seedu.address.Main.main()
+Oct 25, 2026 6:51:57 PM seedu.address.Main main
+WARNING: The warnings about a 'restricted method in java.lang.System' and 'enabling native access' appearing below (if any) can be ignored.
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @67b1a203'
+WARNING: Timeout while waiting for app reactivation
+Oct 25, 2026 6:52:02 PM seedu.address.MainApp init
+INFO: =============================[ Initializing AddressBook ]===========================
+Oct 25, 2026 6:52:02 PM seedu.address.MainApp initPrefs
+INFO: Using preference file : preferences.json
+Oct 25, 2026 6:52:02 PM seedu.address.MainApp initPrefs
+INFO: Creating new preference file preferences.json
+Oct 25, 2026 6:52:02 PM seedu.address.MainApp initModelManager
+INFO: Using data file : data/addressbook.json
+Oct 25, 2026 6:52:02 PM seedu.address.MainApp initModelManager
+INFO: Creating a new data file data/addressbook.json populated with a sample AddressBook.
+Oct 25, 2026 6:52:02 PM seedu.address.MainApp start
+INFO: Starting AddressBook V0.5.1
+INFO: Starting UI...
+INFO: ----------------[USER COMMAND][/t friends]
+INFO: An error occurred while executing command: /t friends
+INFO: ----------------[USER COMMAND][\t friends]
+INFO: An error occurred while executing command: \t friends
+INFO: ----------------[USER COMMAND][\t friends]
+INFO: An error occurred while executing command: \t friends
+INFO: ----------------[USER COMMAND][\t friends]
+INFO: An error occurred while executing command: \t friends
+INFO: ----------------[USER COMMAND][/t]
+INFO: An error occurred while executing command: /t
+INFO: ----------------[USER COMMAND][/t]
+INFO: An error occurred while executing command: /t
+INFO: ----------------[USER COMMAND][/t]
+INFO: An error occurred while executing command: /t
+INFO: ----------------[USER COMMAND][oliv]
+INFO: An error occurred while executing command: oliv
+INFO: ----------------[USER COMMAND][oliv]
+INFO: An error occurred while executing command: oliv
+INFO: ----------------[USER COMMAND][oliv]
+INFO: An error occurred while executing command: oliv
+INFO: ----------------[USER COMMAND][find /t friends]
+INFO: Result: 0 person(s) listed!
+INFO: ----------------[USER COMMAND][find \t friends]
+INFO: Result: 0 person(s) listed!
+INFO: ----------------[USER COMMAND][clear]
+INFO: Result: Address book has been cleared!

@@ -1,0 +1,17 @@
+<map id="seedu.address.ui.MainWindow" name="seedu.address.ui.MainWindow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="571,98,771,124"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1ui_1_1_ui_part.html" title=" " alt="" coords="5,5,167,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,13,262,10,355,11,453,21,548,42,607,67,654,98,649,97,604,72,547,47,452,26,354,17,262,15,183,18"/>
+<area shape="rect" id="Node000007" href="$classseedu_1_1address_1_1ui_1_1_help_window.html" title=" " alt="" coords="220,46,418,72"/>
+<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="182,37,227,44,222,47,183,42"/>
+<area shape="rect" id="Node000003" href="$interfaceseedu_1_1address_1_1logic_1_1_logic.html" title=" " alt="" coords="233,97,405,122"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="421,107,574,110,568,111,421,113"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1ui_1_1_person_list_panel.html" title=" " alt="" coords="226,147,412,187"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="427,154,547,137,615,125,620,124,548,142,428,159"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1ui_1_1_ui_part.html" title=" " alt="" coords="5,175,167,215"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="182,181,228,178,223,179,183,186"/>
+<area shape="rect" id="Node000006" href="$classseedu_1_1address_1_1ui_1_1_result_display.html" title=" " alt="" coords="216,212,422,237"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="182,204,218,211,213,211,182,210"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="438,208,493,196,546,180,604,151,649,125,654,124,607,156,548,184,494,201,439,213"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="434,69,548,84,608,97,603,98,547,90,434,74"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="seedu.address.logic.parser.ParserUtil.parseName" name="seedu.address.logic.parser.ParserUtil.parseName">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,33,186,74"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1model_1_1person_1_1_name.html#a981691480ceeb60a6e5c2f72e8c25a0f" title=" " alt="" coords="529,5,721,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,30,233,19,306,13,379,11,516,17,511,18,379,16,306,18,234,24,173,35"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1model_1_1person_1_1_name.html#a60e21e7fc913d2d9dcdeb5f51ced644f" title=" " alt="" coords="261,33,454,74"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,51,248,53,243,54,186,56"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1logic_1_1parser_1_1exceptions_1_1_parse_exception.html#af176dd2db5bbf9d540dc97c1aba81e25" title=" " alt="" coords="234,99,481,139"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="180,72,261,94,256,95,180,77"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="454,41,516,37,511,38,454,46"/>
+</map>

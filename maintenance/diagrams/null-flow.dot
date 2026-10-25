@@ -1,0 +1,13 @@
+digraph NullFlow {
+ graph [rankdir=TB, bgcolor="white", pad="0.25"];
+ node [shape=box, style=rounded, fontname="Helvetica", fontsize=11];
+ file [label="Saved document: null"];
+ decode [label="Jackson decoder\nreturns Java null"];
+ before [label="Baseline: Optional.of(null)\nNullPointerException"];
+ after [label="Maintained: requireDocumentValue\nIOException -> DataLoadingException"];
+ recovery [label="MainApp existing recovery\nempty contacts or default preferences"];
+ file -> decode;
+ decode -> before [label="before"];
+ decode -> after [label="after"];
+ after -> recovery;
+}

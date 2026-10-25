@@ -1,0 +1,7 @@
+Clean publication history
+
+Upstream baseline: 56d1ffbb9cc8df72b97c112fcfdd0cac635652db
+Source-only original chain ends at: 03bf56f6cbcdd2fc6cc607db867ff6d2fec36a59
+Original IDE extraction commit referenced by recorded evidence: 3c62f6b2345abe8377d55ca053de3920d03f4b22
+Same extraction reapplied onto source-only history for publication: 763d2629
+The publication branch preserves the six original source changes and reapplies the final source extraction without unrelated local document history. Source content is checked against the maintained workspace. Recorded evidence commit IDs refer to their original authoring snapshots.

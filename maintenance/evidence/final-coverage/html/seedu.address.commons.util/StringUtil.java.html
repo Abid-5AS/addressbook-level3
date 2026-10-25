@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StringUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.commons.util</a> &gt; <span class="el_source">StringUtil.java</span></div><h1>StringUtil.java</h1><pre class="source lang-java linenums">package seedu.address.commons.util;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Arrays;
+
+/**
+ * Helper functions for handling strings.
+ */
+<span class="nc" id="L13">public class StringUtil {</span>
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code word}.
+     *   Ignores case, but a full word match is required.
+     *   &lt;br&gt;examples:&lt;pre&gt;
+     *       containsWordIgnoreCase(&quot;ABc def&quot;, &quot;abc&quot;) == true
+     *       containsWordIgnoreCase(&quot;ABc def&quot;, &quot;DEF&quot;) == true
+     *       containsWordIgnoreCase(&quot;ABc def&quot;, &quot;AB&quot;) == false //not a full word match
+     *       &lt;/pre&gt;
+     * @param sentence cannot be null
+     * @param word cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsWordIgnoreCase(String sentence, String word) {
+<span class="fc" id="L27">        requireNonNull(sentence);</span>
+<span class="fc" id="L28">        requireNonNull(word);</span>
+
+<span class="fc" id="L30">        String preppedWord = word.trim();</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        checkArgument(!preppedWord.isEmpty(), &quot;Word parameter cannot be empty&quot;);</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        checkArgument(preppedWord.split(&quot;\\s+&quot;).length == 1, &quot;Word parameter should be a single word&quot;);</span>
+
+<span class="fc" id="L34">        String preppedSentence = sentence;</span>
+<span class="fc" id="L35">        String[] wordsInPreppedSentence = preppedSentence.split(&quot;\\s+&quot;);</span>
+
+<span class="fc" id="L37">        return Arrays.stream(wordsInPreppedSentence)</span>
+<span class="fc" id="L38">                .anyMatch(preppedWord::equalsIgnoreCase);</span>
+    }
+
+    /**
+     * Returns a detailed message of {@code t}, including the stack trace.
+     */
+    public static String getDetails(Throwable t) {
+<span class="fc" id="L45">        requireNonNull(t);</span>
+<span class="fc" id="L46">        StringWriter sw = new StringWriter();</span>
+<span class="fc" id="L47">        t.printStackTrace(new PrintWriter(sw));</span>
+<span class="fc" id="L48">        return t.getMessage() + &quot;\n&quot; + sw.toString();</span>
+    }
+
+    /**
+     * Returns true if {@code s} represents a non-zero unsigned integer
+     * e.g. 1, 2, 3, ..., {@code Integer.MAX_VALUE} &lt;br&gt;
+     * Will return false for any other non-null string input
+     * e.g. empty string, &quot;-1&quot;, &quot;0&quot;, &quot;+1&quot;, and &quot; 2 &quot; (untrimmed), &quot;3 0&quot; (contains whitespace), &quot;1 a&quot; (contains letters)
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isNonZeroUnsignedInteger(String s) {
+<span class="fc" id="L59">        requireNonNull(s);</span>
+
+        try {
+<span class="fc" id="L62">            int value = Integer.parseInt(s);</span>
+<span class="fc bfc" id="L63" title="All 4 branches covered.">            return value &gt; 0 &amp;&amp; !s.startsWith(&quot;+&quot;); // &quot;+1&quot; is successfully parsed by Integer#parseInt(String)</span>
+<span class="fc" id="L64">        } catch (NumberFormatException nfe) {</span>
+<span class="fc" id="L65">            return false;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

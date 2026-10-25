@@ -1,0 +1,7 @@
+<map id="seedu.address.logic.Messages.getErrorMessageForDuplicatePrefixes" name="seedu.address.logic.Messages.getErrorMessageForDuplicatePrefixes">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,230,46"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1logic_1_1parser_1_1_prefix.html#aeaca0a29fcde1f2153ed91a43faa4aa1" title=" " alt="" coords="278,5,458,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,23,265,26,259,26,230,28"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1logic_1_1parser_1_1_prefix.html#aaf6db7d47879177ba15e61bbde286d7b" title=" " alt="" coords="506,5,686,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="458,23,493,26,488,26,458,28"/>
+</map>

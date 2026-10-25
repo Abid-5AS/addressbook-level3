@@ -29,3 +29,14 @@ CLAUDE.md
 
 # Temp files
 _temp/
+
+# Generated lab outputs (reproducible, retained locally)
+/maintenance/generated/
+/maintenance/demo-state/
+
+# Local runtime recording may include machine metadata
+/maintenance/evidence/demo.jfr
+/maintenance/AddressBook_Maintenance_Submission.zip
+
+# Clean submission export and upload staging
+/maintenance/submission/

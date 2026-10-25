@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.model.AddressBookTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-10-22T09:00:21.702Z" hostname="MacBook-Air.local" time="0.003">
+  <properties/>
+  <testcase name="getPersonList_modifyList_throwsUnsupportedOperationException()" classname="seedu.address.model.AddressBookTest" time="0.001"/>
+  <testcase name="constructor()" classname="seedu.address.model.AddressBookTest" time="0.0"/>
+  <testcase name="hasPerson_nullPerson_throwsNullPointerException()" classname="seedu.address.model.AddressBookTest" time="0.0"/>
+  <testcase name="hasPerson_personInAddressBook_returnsTrue()" classname="seedu.address.model.AddressBookTest" time="0.0"/>
+  <testcase name="toStringMethod()" classname="seedu.address.model.AddressBookTest" time="0.0"/>
+  <testcase name="resetData_null_throwsNullPointerException()" classname="seedu.address.model.AddressBookTest" time="0.001"/>
+  <testcase name="resetData_withValidReadOnlyAddressBook_replacesData()" classname="seedu.address.model.AddressBookTest" time="0.0"/>
+  <testcase name="hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue()" classname="seedu.address.model.AddressBookTest" time="0.0"/>
+  <testcase name="resetData_withDuplicatePersons_throwsDuplicatePersonException()" classname="seedu.address.model.AddressBookTest" time="0.0"/>
+  <testcase name="hasPerson_personNotInAddressBook_returnsFalse()" classname="seedu.address.model.AddressBookTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

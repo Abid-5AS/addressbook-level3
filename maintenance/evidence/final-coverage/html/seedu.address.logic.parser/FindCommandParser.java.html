@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FindCommandParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.logic.parser</a> &gt; <span class="el_source">FindCommandParser.java</span></div><h1>FindCommandParser.java</h1><pre class="source lang-java linenums">package seedu.address.logic.parser;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.List;
+
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
+
+/**
+ * Parses input arguments and creates a new FindCommand object
+ */
+<span class="fc" id="L15">public class FindCommandParser implements Parser&lt;FindCommand&gt; {</span>
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the FindCommand
+     * and returns a FindCommand object for execution.
+     * @throws ParseException if the user input does not conform to the expected format
+     */
+    public FindCommand parse(String args) throws ParseException {
+<span class="fc" id="L23">        String trimmedArgs = args.trim();</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (trimmedArgs.isEmpty()) {</span>
+<span class="fc" id="L25">            throw new ParseException(</span>
+<span class="fc" id="L26">                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));</span>
+        }
+
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (trimmedArgs.startsWith(&quot;t/&quot;)) {</span>
+<span class="fc" id="L30">            return parseTagQuery(trimmedArgs);</span>
+        }
+
+<span class="fc" id="L33">        String[] nameKeywords = trimmedArgs.split(&quot;\\s+&quot;);</span>
+
+<span class="fc" id="L35">        return new FindCommand(new NameContainsKeywordsPredicate(List.of(nameKeywords)));</span>
+    }
+
+    private static FindCommand parseTagQuery(String trimmedArgs) throws ParseException {
+<span class="fc" id="L39">        String tagArguments = trimmedArgs.substring(2).trim();</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (tagArguments.isEmpty()) {</span>
+<span class="fc" id="L41">            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));</span>
+        }
+<span class="fc" id="L43">        return new FindCommand(new TagContainsKeywordsPredicate(List.of(tagArguments.split(&quot;\\s+&quot;))));</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

@@ -1,0 +1,11 @@
+<map id="seedu.address.model.util.SampleDataUtil.getTagSet" name="seedu.address.model.util.SampleDataUtil.getTagSet">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1047,5,1223,46"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1model_1_1util_1_1_sample_data_util.html#a5ca04d41f270a1f85c714d9f44cc3c7c" title=" " alt="" coords="771,5,999,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1028,26,999,28,999,23,1034,26"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1model_1_1util_1_1_sample_data_util.html#aac1a15804accca2a2819c6bf754a49bf" title=" " alt="" coords="466,5,723,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="753,26,724,28,724,23,758,26"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1_main_app.html#a3a1a439214eb6c1cd6f3214548fa58b4" title=" " alt="" coords="236,5,418,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="447,26,418,28,418,23,453,26"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1_main_app.html#a64910163983aefa194771aae3622779b" title=" " alt="" coords="5,13,188,38"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="218,26,188,28,188,23,223,25"/>
+</map>

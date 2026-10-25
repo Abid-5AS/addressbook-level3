@@ -1,0 +1,21 @@
+<map id="seedu.address.ui.MainWindow.MainWindow" name="seedu.address.ui.MainWindow.MainWindow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,104,207,145"/>
+<area shape="rect" id="Node000002" href="$interfaceseedu_1_1address_1_1logic_1_1_logic.html#a5a6784fb4edaf54201cb6ca5411c256d" title=" " alt="" coords="267,5,462,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,101,254,57,279,50,274,53,256,61,152,106"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1ui_1_1_help_window.html#a7958966d86b7f74c78b5910c00efde3b" title=" " alt="" coords="264,71,464,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,109,251,105,246,107,208,114"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1ui_1_1_main_window.html#a77d6e980d2ed60c0baca30758164ea2e" title=" " alt="" coords="255,136,474,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="207,134,242,140,237,142,208,139"/>
+<area shape="rect" id="Node000007" href="$classseedu_1_1address_1_1ui_1_1_main_window.html#a2b4395e5bc7c1aa40952f426fab222eb" title=" " alt="" coords="255,217,474,258"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="155,142,305,209,300,212,154,148"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1ui_1_1_main_window.html#acd263fd70495eea17af53547a7f2d05e" title=" " alt="" coords="526,119,746,159"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="474,147,514,146,509,148,475,152"/>
+<area shape="rect" id="Node000006" href="$classseedu_1_1address_1_1ui_1_1_ui_part.html#a4a3eb1bb866885040b87d13797e73730" title=" " alt="" coords="798,119,960,159"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="746,136,786,139,780,139,747,142"/>
+<area shape="rect" id="Node000008" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html#adac2ded58ff1bc4da98739eda77b358a" title=" " alt="" coords="522,184,750,225"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="474,222,509,220,504,221,475,227"/>
+<area shape="rect" id="Node000009" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html#a789fedd8b2a9927b49c83729d34659b5" title=" " alt="" coords="536,249,736,290"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="474,248,523,256,518,256,474,253"/>
+<area shape="rect" id="Node000010" href="$classseedu_1_1address_1_1commons_1_1core_1_1_gui_settings.html#adac1cb9d9ddb4cd78f2b51b875296e2b" title=" " alt="" coords="536,315,736,355"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="414,256,523,299,548,310,543,309,521,304,413,261"/>
+</map>

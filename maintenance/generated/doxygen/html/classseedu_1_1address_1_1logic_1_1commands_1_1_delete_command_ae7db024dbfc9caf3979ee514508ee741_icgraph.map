@@ -1,0 +1,11 @@
+<map id="seedu.address.logic.commands.DeleteCommand.DeleteCommand" name="seedu.address.logic.commands.DeleteCommand.DeleteCommand">
+<area shape="rect" id="Node000001" title=" " alt="" coords="763,39,985,79"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1logic_1_1commands_1_1_delete_command.html#a82dc6edb995e1797bbd83d66e44ec0dd" title=" " alt="" coords="506,5,715,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="745,43,716,42,716,36,750,43"/>
+<area shape="rect" id="Node000003" href="$classseedu_1_1address_1_1logic_1_1parser_1_1_delete_command_parser.html#a595cd22203a4ca8771b4749ca1516e7c" title=" " alt="" coords="514,71,707,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="751,74,707,82,707,77,745,75"/>
+<area shape="rect" id="Node000004" href="$classseedu_1_1address_1_1logic_1_1parser_1_1_address_book_parser.html#afb312ca992c74e67321c93703d86ff8b" title=" " alt="" coords="226,71,458,111"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="496,91,458,94,458,88,502,91"/>
+<area shape="rect" id="Node000005" href="$classseedu_1_1address_1_1logic_1_1_logic_manager.html#a84f88d6c1d528c1a9d5fec39ab2d8275" title=" " alt="" coords="5,71,178,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="207,91,178,94,178,88,212,91"/>
+</map>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainWindow.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AddressBook-Maintenance</a> &gt; <a href="index.source.html" class="el_package">seedu.address.ui</a> &gt; <span class="el_source">MainWindow.java</span></div><h1>MainWindow.java</h1><pre class="source lang-java linenums">package seedu.address.ui;
+
+import java.nio.file.Path;
+import java.util.logging.Logger;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * The Main Window. Provides the basic application layout containing
+ * a menu bar and space where other JavaFX elements can be placed.
+ */
+public class MainWindow extends UiPart&lt;Stage&gt; {
+
+    private static final String FXML = &quot;MainWindow.fxml&quot;;
+
+<span class="nc" id="L29">    private final Logger logger = LogsCenter.getLogger(getClass());</span>
+
+    private Stage primaryStage;
+    private Logic logic;
+    private Path dataFilePath;
+
+    // Independent Ui parts residing in this Ui container
+    private PersonListPanel personListPanel;
+    private ResultDisplay resultDisplay;
+    private HelpWindow helpWindow;
+
+    @FXML
+    private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane statusbarPlaceholder;
+
+    /**
+     * Creates a {@code MainWindow} with the given {@code Stage}, {@code Logic},
+     * and the data file path to show in the status bar.
+     */
+    public MainWindow(Stage primaryStage, Logic logic, Path dataFilePath) {
+<span class="nc" id="L60">        super(FXML, primaryStage);</span>
+
+        // Set dependencies
+<span class="nc" id="L63">        this.primaryStage = primaryStage;</span>
+<span class="nc" id="L64">        this.logic = logic;</span>
+<span class="nc" id="L65">        this.dataFilePath = dataFilePath;</span>
+
+        // Configure the UI
+<span class="nc" id="L68">        setWindowDefaultSize(logic.getGuiSettings());</span>
+
+<span class="nc" id="L70">        setAccelerators();</span>
+
+<span class="nc" id="L72">        helpWindow = new HelpWindow();</span>
+<span class="nc" id="L73">    }</span>
+
+    public Stage getPrimaryStage() {
+<span class="nc" id="L76">        return primaryStage;</span>
+    }
+
+    private void setAccelerators() {
+<span class="nc" id="L80">        setAccelerator(helpMenuItem, KeyCombination.valueOf(&quot;F1&quot;));</span>
+<span class="nc" id="L81">    }</span>
+
+    /**
+     * Sets the accelerator of a MenuItem.
+     * @param keyCombination the KeyCombination value of the accelerator
+     */
+    private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
+<span class="nc" id="L88">        menuItem.setAccelerator(keyCombination);</span>
+
+        /*
+         * TODO: the code below can be removed once the bug reported here
+         * https://bugs.openjdk.java.net/browse/JDK-8131666
+         * is fixed in a later version of the SDK.
+         *
+         * According to the bug report, TextInputControl (TextField, TextArea) will
+         * consume function-key events. Because CommandBox contains a TextField and
+         * ResultDisplay contains a TextArea, some accelerators (e.g., F1) will
+         * not work when the focus is in them because the key event is consumed by
+         * the TextInputControl(s).
+         *
+         * For now, we add the following event filter to capture such key events and open
+         * the help window purposely so as to support accelerators even when focus is
+         * in CommandBox or ResultDisplay.
+         */
+<span class="nc" id="L105">        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -&gt; {</span>
+<span class="nc bnc" id="L106" title="All 4 branches missed.">            if (event.getTarget() instanceof TextInputControl &amp;&amp; keyCombination.match(event)) {</span>
+<span class="nc" id="L107">                menuItem.getOnAction().handle(new ActionEvent());</span>
+<span class="nc" id="L108">                event.consume();</span>
+            }
+<span class="nc" id="L110">        });</span>
+<span class="nc" id="L111">    }</span>
+
+    /**
+     * Fills up all the placeholders of this window.
+     */
+    void fillInnerParts() {
+<span class="nc" id="L117">        personListPanel = new PersonListPanel(logic.getFilteredPersonList());</span>
+<span class="nc" id="L118">        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());</span>
+
+<span class="nc" id="L120">        resultDisplay = new ResultDisplay();</span>
+<span class="nc" id="L121">        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());</span>
+
+<span class="nc" id="L123">        StatusBarFooter statusBarFooter = new StatusBarFooter(dataFilePath);</span>
+<span class="nc" id="L124">        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());</span>
+
+<span class="nc" id="L126">        CommandBox commandBox = new CommandBox(this::executeCommand);</span>
+<span class="nc" id="L127">        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());</span>
+<span class="nc" id="L128">    }</span>
+
+    /**
+     * Sets the default size based on {@code guiSettings}.
+     */
+    private void setWindowDefaultSize(GuiSettings guiSettings) {
+<span class="nc" id="L134">        primaryStage.setHeight(guiSettings.getWindowHeight());</span>
+<span class="nc" id="L135">        primaryStage.setWidth(guiSettings.getWindowWidth());</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if (guiSettings.getWindowCoordinates() != null) {</span>
+<span class="nc" id="L137">            primaryStage.setX(guiSettings.getWindowCoordinates().getX());</span>
+<span class="nc" id="L138">            primaryStage.setY(guiSettings.getWindowCoordinates().getY());</span>
+        }
+<span class="nc" id="L140">    }</span>
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleHelp() {
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (!helpWindow.isShowing()) {</span>
+<span class="nc" id="L148">            helpWindow.show();</span>
+        } else {
+<span class="nc" id="L150">            helpWindow.focus();</span>
+        }
+<span class="nc" id="L152">    }</span>
+
+    void show() {
+<span class="nc" id="L155">        primaryStage.show();</span>
+<span class="nc" id="L156">    }</span>
+
+    /**
+     * Closes the application.
+     */
+    @FXML
+    private void handleExit() {
+<span class="nc" id="L163">        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),</span>
+<span class="nc" id="L164">                (int) primaryStage.getX(), (int) primaryStage.getY());</span>
+<span class="nc" id="L165">        logic.setGuiSettings(guiSettings);</span>
+<span class="nc" id="L166">        helpWindow.hide();</span>
+<span class="nc" id="L167">        primaryStage.hide();</span>
+<span class="nc" id="L168">    }</span>
+
+    public PersonListPanel getPersonListPanel() {
+<span class="nc" id="L171">        return personListPanel;</span>
+    }
+
+    /**
+     * Executes the command and returns the result.
+     *
+     * @see seedu.address.logic.Logic#execute(String)
+     */
+    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+        try {
+<span class="nc" id="L181">            CommandResult commandResult = logic.execute(commandText);</span>
+<span class="nc" id="L182">            logger.info(&quot;Result: &quot; + commandResult.getFeedbackToUser());</span>
+<span class="nc" id="L183">            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());</span>
+
+<span class="nc bnc" id="L185" title="All 2 branches missed.">            if (commandResult.isShowHelp()) {</span>
+<span class="nc" id="L186">                handleHelp();</span>
+            }
+
+<span class="nc bnc" id="L189" title="All 2 branches missed.">            if (commandResult.isExit()) {</span>
+<span class="nc" id="L190">                handleExit();</span>
+            }
+
+<span class="nc" id="L193">            return commandResult;</span>
+<span class="nc" id="L194">        } catch (CommandException | ParseException e) {</span>
+<span class="nc" id="L195">            logger.info(&quot;An error occurred while executing command: &quot; + commandText);</span>
+<span class="nc" id="L196">            resultDisplay.setFeedbackToUser(e.getMessage());</span>
+<span class="nc" id="L197">            throw e;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

@@ -1,0 +1,119 @@
+commit dd9d211bbd26b265525e7f10f10483874f7a50a8
+Author:     Md. Abid Shahriar <abidshahriar@iut-dhaka.edu>
+AuthorDate: Thu Oct 22 09:29:15 2026 +0600
+Commit:     Md. Abid Shahriar <abidshahriar@iut-dhaka.edu>
+CommitDate: Thu Oct 22 09:29:15 2026 +0600
+
+    Stage JSON saves before atomic replacement to preserve existing data
+
+diff --git a/src/main/java/seedu/address/commons/util/FileUtil.java b/src/main/java/seedu/address/commons/util/FileUtil.java
+index e7b7ce67..357efdb6 100644
+--- a/src/main/java/seedu/address/commons/util/FileUtil.java
++++ b/src/main/java/seedu/address/commons/util/FileUtil.java
+@@ -3,6 +3,7 @@ package seedu.address.commons.util;
+ import java.io.IOException;
+ import java.nio.file.Files;
+ import java.nio.file.Path;
++import java.nio.file.StandardCopyOption;
+ 
+ /**
+  * Writes and reads files
+@@ -51,4 +52,31 @@ public class FileUtil {
+         Files.write(file, content.getBytes(CHARSET));
+     }
+ 
++    /**
++     * Replaces a file only after its complete new contents have been written to a sibling temporary file.
++     * Fails without a non-atomic fallback if the filesystem does not support atomic replacement.
++     */
++    public static void writeAtomically(Path file, String content) throws IOException {
++        writeAtomically(file, content, FileUtil::writeToFile);
++    }
++
++    /** Package-private writer seam allows deterministic interrupted-write regression tests. */
++    static void writeAtomically(Path file, String content, ContentWriter writer) throws IOException {
++        Path target = file.toAbsolutePath();
++        createParentDirsOfFile(target);
++        Path temporary = Files.createTempFile(target.getParent(), ".addressbook-", ".tmp");
++        try {
++            writer.write(temporary, content);
++            Files.move(temporary, target, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
++        } finally {
++            Files.deleteIfExists(temporary);
++        }
++    }
++
++    /** Writes the staged content; production uses the same UTF-8 writer as ordinary files. */
++    @FunctionalInterface
++    interface ContentWriter {
++        void write(Path file, String content) throws IOException;
++    }
++
+ }
+diff --git a/src/main/java/seedu/address/commons/util/JsonUtil.java b/src/main/java/seedu/address/commons/util/JsonUtil.java
+index 328aa01c..8acac863 100644
+--- a/src/main/java/seedu/address/commons/util/JsonUtil.java
++++ b/src/main/java/seedu/address/commons/util/JsonUtil.java
+@@ -32,7 +32,7 @@ public class JsonUtil {
+             .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+ 
+     static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
+-        FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
++        FileUtil.writeAtomically(jsonFile, toJsonString(objectToSerialize));
+     }
+ 
+     static <T> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
+diff --git a/src/test/java/seedu/address/commons/util/AtomicFileWriteTest.java b/src/test/java/seedu/address/commons/util/AtomicFileWriteTest.java
+new file mode 100644
+index 00000000..0e3234ad
+--- /dev/null
++++ b/src/test/java/seedu/address/commons/util/AtomicFileWriteTest.java
+@@ -0,0 +1,48 @@
++package seedu.address.commons.util;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertThrows;
++
++import java.io.IOException;
++import java.nio.file.Files;
++import java.nio.file.Path;
++
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.io.TempDir;
++
++public class AtomicFileWriteTest {
++    @TempDir
++    private Path directory;
++
++    @Test
++    public void writeAtomically_replacesExistingContentAndCleansStagingFile() throws IOException {
++        Path target = directory.resolve("contacts.json");
++        Files.writeString(target, "old contents");
++        FileUtil.writeAtomically(target, "new contents");
++        assertEquals("new contents", Files.readString(target));
++        try (var files = Files.list(directory)) {
++            assertEquals(1, files.count());
++        }
++    }
++
++    @Test
++    public void writeAtomically_interruptedStaging_preservesOriginalAndCleansTemporary() throws IOException {
++        Path target = directory.resolve("contacts.json");
++        Files.writeString(target, "original intact");
++        assertThrows(IOException.class, () -> FileUtil.writeAtomically(target, "replacement", (temporary, content) -> {
++            Files.writeString(temporary, "partial");
++            throw new IOException("Simulated disk write interruption");
++        }));
++        assertEquals("original intact", Files.readString(target));
++        try (var files = Files.list(directory)) {
++            assertEquals(1, files.count());
++        }
++    }
++
++    @Test
++    public void writeAtomically_createsNestedParentAndPreservesUtf8() throws IOException {
++        Path target = directory.resolve("nested/contacts.json");
++        FileUtil.writeAtomically(target, "ঢাকা");
++        assertEquals("ঢাকা", Files.readString(target));
++    }
++}

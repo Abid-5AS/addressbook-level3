@@ -1,0 +1,15 @@
+digraph SaveFlow {
+ graph [rankdir=TB, bgcolor="white", pad="0.25"];
+ node [shape=box, style=rounded, fontname="Helvetica", fontsize=11];
+ serialize [label="Serialize complete JSON in memory"];
+ stage [label="Create sibling temporary file"];
+ write [label="Write complete UTF-8 contents"];
+ move [label="Atomic replacement of target"];
+ success [label="New contents visible"];
+ failure [label="IOException before replacement\nOriginal target remains intact"];
+ clean [label="finally: delete staging file"];
+ serialize -> stage -> write -> move -> success -> clean;
+ write -> failure [label="injected partial-write failure"];
+ move -> failure [label="unsupported atomic move"];
+ failure -> clean;
+}

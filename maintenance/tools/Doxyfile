@@ -1,0 +1,17 @@
+PROJECT_NAME = "AddressBook Maintenance Lab"
+OUTPUT_DIRECTORY = maintenance/generated/doxygen
+INPUT = src/main/java
+FILE_PATTERNS = *.java
+RECURSIVE = YES
+EXTRACT_ALL = YES
+EXTRACT_PRIVATE = YES
+GENERATE_LATEX = NO
+GENERATE_HTML = YES
+SOURCE_BROWSER = YES
+INLINE_SOURCES = NO
+HAVE_DOT = YES
+DOT_PATH = /opt/homebrew/bin
+CALL_GRAPH = YES
+CALLER_GRAPH = YES
+QUIET = YES
+WARN_LOGFILE = maintenance/evidence/doxygen-warnings.txt

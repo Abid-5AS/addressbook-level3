@@ -1,0 +1,10 @@
+<map id="seedu.address.MainApp.stop" name="seedu.address.MainApp.stop">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,78,196,104"/>
+<area shape="rect" id="Node000002" href="$classseedu_1_1address_1_1commons_1_1util_1_1_string_util.html#a8aca06fa04ebda34c6c89645bc6cbfcd" title=" " alt="" coords="265,5,457,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,75,264,49,260,52,156,80"/>
+<area shape="rect" id="Node000003" href="$interfaceseedu_1_1address_1_1model_1_1_model.html#a2ebcfc6de2e4c4a514cf2c8bfad5d37c" title=" " alt="" coords="258,71,464,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,88,245,90,239,92,197,94"/>
+<area shape="rect" id="Node000004" href="$interfaceseedu_1_1address_1_1storage_1_1_storage.html#a67be97e911e5d392f5fadefc8067b637" title=" " alt="" coords="244,160,478,201"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,102,287,153,283,156,140,107"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="312,158,310,150,318,141,335,135,361,133,389,136,407,145,402,144,388,141,361,139,336,141,321,145,315,151,317,161"/>
+</map>

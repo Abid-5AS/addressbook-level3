@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.commons.util.AtomicFileWriteTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-22T09:00:21.420Z" hostname="MacBook-Air.local" time="0.01">
+  <properties/>
+  <testcase name="writeAtomically_createsNestedParentAndPreservesUtf8()" classname="seedu.address.commons.util.AtomicFileWriteTest" time="0.007"/>
+  <testcase name="writeAtomically_replacesExistingContentAndCleansStagingFile()" classname="seedu.address.commons.util.AtomicFileWriteTest" time="0.002"/>
+  <testcase name="writeAtomically_interruptedStaging_preservesOriginalAndCleansTemporary()" classname="seedu.address.commons.util.AtomicFileWriteTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

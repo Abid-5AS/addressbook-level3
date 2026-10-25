@@ -1,0 +1,37 @@
+The following is a diff from the previous accessibility tree for Window: "Address App" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 50, 56, 63-84
+~	2 text field (settable) Enter command here...
++		50 text Enter command here...
+~		4 text
+~	5 text entry area Listed all persons.
+~			7 text Listed all persons.
+~			51 text 1. 
+~			52 text Alex Yeoh
+~			53 text friends
+~			54 text 87438807
+~			55 text Blk 30 Geylang Street 29, #06-40
++			56 text alexyeoh@example.com
+~			57 text 2. 
+~			58 text Bernice Yu
+~			59 text colleagues
+~			60 text friends
+~			61 text 99272758
+~			62 text Blk 30 Lorong 3 Serangoon Gardens, #07-18
++			63 text berniceyu@example.com
++			64 text 3. 
++			65 text Charlotte Oliveiro
++			66 text neighbours
++			67 text 93210283
++			68 text Blk 11 Ang Mo Kio Street 74, #11-04
++			69 text charlotte@example.com
++			70 text 4. 
++			71 text David Li
++			72 text family
++			73 text 91031282
++			74 text Blk 436 Serangoon Gardens Street 26, #16-43
++			75 text lidavid@example.com
++		76 scroll bar 0
++			77 increment arrow button
++			78 decrement arrow button
++			79 value indicator 0
+The focused UI element is 2 text field (settable) Enter command here...
