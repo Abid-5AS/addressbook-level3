@@ -76,8 +76,8 @@
       "sha256": "47b206de74afde913c7ac721905d14dc0dc9c946c4b82b714da09536ef75e3da"
     },
     "maintenance/AddressBook_Maintenance_Report.pdf": {
-      "bytes": 1170639,
-      "sha256": "28133070a00f355a5ca3eb0f7c2c60ec0a3970d24071ec30edbec2689c498204"
+      "bytes": 1170638,
+      "sha256": "1644bebf60ca2677ad07cca4e91f735845a54b1de283d372c4f077ec39d2c1a6"
     },
     "maintenance/README.md": {
       "bytes": 2130,
@@ -85,7 +85,7 @@
     },
     "maintenance/REPORT.md": {
       "bytes": 22898,
-      "sha256": "dc2c660b2b0825bf6744acd6d224e7d68d238ca3bd2a2e388bb59a9bd44ef12c"
+      "sha256": "5d9bc7a75d4ab67ec84a9e82b7506005409fb971737ae89d249a5cbb414780c6"
     },
     "maintenance/TOOL-EVIDENCE.md": {
       "bytes": 5872,
@@ -10561,7 +10561,7 @@
     },
     "maintenance/tools/build-report.py": {
       "bytes": 7254,
-      "sha256": "94782f26b2d95498673081f546e518a1846a4cecab0e62291421f8e479eccabe"
+      "sha256": "bf34ff7788c8f9d18068da1a5a5d79ee04e592af9ba623a46c07a431174eaf30"
     },
     "maintenance/tools/package-submission.py": {
       "bytes": 5468,

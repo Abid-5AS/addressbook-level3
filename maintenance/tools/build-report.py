@@ -61,7 +61,7 @@ story += [Image(str(logo),width=lw*scale,height=lh*scale),Spacer(1,22),
     para('Four Categories of Maintenance with Tool-Based Verification','CoverSmall'),Spacer(1,30)]
 rows=[('Name','Md. Abid Shahriar'),('Student ID','210042155'),('Program','BSc in Software Engineering'),
     ('Department','Computer Science and Engineering'),('Course Code','SWE 4802'),
-    ('Report Date','25 October 2026')]
+    ('Report Date','26 October 2026')]
 cover=Table([[para(k,'CoverLabel'),para(': '+v,'CoverValue')] for k,v in rows],
     colWidths=[112,WIDTH-112],hAlign='LEFT')
 cover.setStyle(TableStyle([('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),0),
